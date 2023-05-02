@@ -1,0 +1,43 @@
+<div class="">
+    <div>
+        <form action="">
+            <select name="Option" id="Option" class="form-control w-25 float-end">
+                <option value="AllPayment">All Payment</option>
+                <option value="SuccessPayment">Success Payment</option>
+                <option value="PendingPayment">Pending Payment</option>
+            </select>
+        </form>
+    </div>
+    <table class="table">
+         <tr>
+             <th>S.NO</th>
+             <th>Registration NO</th>
+             <th>Payment Reference NO</th>
+             <th>Email</th>
+             <th>Payment Date</th>
+             <th>Payment Time</th>
+             <th>Payment Status</th>
+
+         </tr>
+            <%for (let i = 0; i < Result.length; i++) {%>    
+                    <% if (Result[i].PaymentStatus) {%>
+            <tr>
+                <td><%=i+1%> </td>
+                <td><%=Result[i].RegistrationNO%> </td>
+                <td><%=Result[i].PaymentReferenceNO%></td>
+                <td><%=Result[i].Email%></td>
+                <td><%=Result[i].PaymentDate%></td>
+                <td><%=Result[i].PaymentTime%></td>
+                <td><%=Result[i].PaymentStatus%></td>
+            </tr>
+            <%}%>
+            <%}%>
+                
+    </table>
+ </div>   
+ <script>
+    const Value=$('#Option').val()
+    if (Value==='SuccessPayment') {
+    } else if(Value==='PendingPayment') {
+    }
+ </script>

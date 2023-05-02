@@ -1,0 +1,93 @@
+<title>Admin DashBoard</title>
+   <%- include('../Layout/bootstrap') %>
+   <link rel="stylesheet" href="/adminStyle/adminDashboardStyle.css">
+    <div class="side-menu">
+       <div>
+           <a href="">
+              <img src="" alt="" width="10px">
+              <h4 class="text-white ml-4">Admin DashBoard</h4>
+           </a>
+        <hr>
+       </div>
+       <div>
+        <a href="">
+           <img src="" alt="" width="10px">
+           <h4 class="text-black ml-4"><%= Result.Name%></h4>
+        </a>
+     <hr>
+    </div>  
+       <div>
+          <input type="search" name="" id="" class="form-control w-75 ml-4" placeholder='Search' >
+       </div>    
+       <div class="">
+            <div class="nav-link" id="EntranceRegister">Entrance Register</div>
+            <div class="nav-link" id="ExaminationManagementSystem">Examination Management System</div>
+            <div class="nav-link" id="LibraryManagementSystem">Library Management System</div>
+            <div class="nav-link" >Entrance Register</div>
+            <div class="nav-link" id="AdminLogout"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;  Logout</div>
+       </div>     
+    </div>
+
+    <div class="container" >
+        <div class="header">
+            <div class="nav">
+                <div class="search">
+                    <input type="text" placeholder="Search.." class="form-control">
+                    <button type="submit" class="btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+                <div class="user">
+                    <a href="#" class="btn btn-success me-5">Add New</a>
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    <div class="img-case">
+                        <img src="user.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cards" id="Content" style="margin-top: 8%;">
+                 <div class="card" id="entranceExamForm">
+                     <h3 class="text-center p-3 text-white">Entrance Exam Final Form</h3>
+                 </div>
+                 <div class="card" id="entranceExamPayment">
+                    <h3 class="text-center p-2 text-white">Entrance Exam Payment</h3>
+                </div>
+                <div class="card">
+                    <h3 class="text-center p-3 text-white">Entrance Exam Reject Form</h3>
+                </div>
+                <div class="card" id="EntranceExamFormVarification">
+                    <h3 class="text-center p-3 text-white">Entrance Exam Form Varification </h3>
+                </div>
+   </div>
+    </div> 
+<script>
+  
+  $(document).ready(function(){
+    $('#EntranceRegister').click(function(){
+           $('#Content').load('/admin/adminentranceExamRegister')
+     })
+     $('#AdminLogout').click(function(){
+        $.ajax({
+                url:'/admin/adminLogout?Email='+'<%= Result.Email %>',
+                type:'Get',
+                success:function(Result){alert(Result)
+                 window.location='/admin/'
+            }
+     })
+     })
+     $('#entranceExamForm').click(function(){
+         $('#Content').load('/admin/adminEntranceExamForm')
+     })
+     $('#entranceExamPayment').click(function(){
+         $('#Content').load('/admin/adminEntranceExamPayment')
+     })
+     $('#ExaminationManagementSystem').click(function(){
+         $('#Content').load('/admin/adminExamination')
+     })
+     $('#EntranceExamFormVarification').click(function(){
+         $('#Content').load('/admin/adminEntranceExamFormVarification')
+     })
+     $('#LibraryManagementSystem').click(function(){
+        $('#Content').load('/admin/adminLMS') 
+     })
+})
+</script>

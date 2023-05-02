@@ -1,0 +1,13 @@
+<title>Admin Dashboard</title>
+<%- include('../Layout/Bootstrap')%>
+<div class="ml-5 me-5">
+    <%for(i=0;i<Result.length;i++){%>
+       <p>Q . <%= Result[i].QuestionNO %> &nbsp; <%= Result[i].Question %></p>
+       <% for(var j=0;j<Result[i].Answer.length;j++){%>
+        <%= j+1 %>. &nbsp; <%= Result[i].Answer[j] %><br><br>
+      <%}%>
+      <button class="btn btn-danger" onclick="Edit()"><i class="fas fa-edit"></i></button>
+      <button class="btn btn-warning"><i class="fas fa-trash"></i></button>
+ <hr class="mt-2 mb-2">
+    <%}%>
+</div>

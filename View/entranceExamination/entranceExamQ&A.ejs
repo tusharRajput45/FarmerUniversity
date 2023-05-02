@@ -1,0 +1,33 @@
+<%- include('../Layout/Bootstrap')%>
+<title>File Upload</title>
+<form action="/entranceExamination/entranceExamQ&A" class=" ml-5 mt-5" id="SubmitForm" autocomplete="off">
+  <input type="text" name="Question" id="" class="form-control text-capitalize w-50 mt-3" placeholder="Question">
+  <input type="text" name="Answer[]" id="" class="form-control text-capitalize w-50 mt-3" placeholder="Answer"> 
+  <input type="text" name="Answer[]" id="" class="form-control text-capitalize w-50 mt-3" placeholder="Answer"> 
+  <input type="text" name="Answer[]" id="" class="form-control text-capitalize w-50 mt-3" placeholder="Answer"> 
+  <input type="text" name="Answer[]" id="" class="form-control text-capitalize w-50 mt-3" placeholder="Answer"> 
+  <input type="text" name="TrueAnswer" id="" class="form-control text-capitalize w-50 mt-3" placeholder="True Answer">
+  <input type="text" name="ExamCode" id="" value="" class="form-control w-50 mt-3" placeholder="Exam Code">
+
+    <button class="btn btn-success mt-5">Submit</button>
+</form>
+<script>
+    $('document').ready(function(){
+        const Form=$('#SubmitForm');
+        $('#SubmitForm').submit(function(event){
+          event.preventDefault();
+          const formData=new FormData(this)
+         $.ajax({
+            url:Form.attr('action'),
+            type:'post',
+            data:formData,
+            contentType:false,
+            processData:false,
+            success:function(data){
+              alert(data)
+            },
+            error:function(){alert('Server Error')}
+         })
+        })
+    })
+</script>

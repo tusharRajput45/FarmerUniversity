@@ -1,0 +1,46 @@
+<title>Entrance Examination Form</title>
+<body>    
+<%- include('../Layout/Logo') %>
+<%- include('../Layout/bootstrap') %>
+<hr class="mt-5">
+<div id="Content" style="margin-bottom: 5%;">
+<div class="bg-dark p-3 pb-5">
+    <div><button class="btn btn-warning ml-5 float-start" id="PersonalDetails">Personal Details</button></div>
+    <div><button class="btn btn-warning ml-3 float-start" id="Documents">Documents</button></div>
+    <div><button class="btn btn-warning ml-3 float-start" id="Payments">Payments</button></div>
+    <div><button class="btn btn-warning ml-3 float-start" id="FinalPrint">Submit Form</button></div>
+    <div><button  class="btn btn-danger ml-3 float-end  me-3" id="Logout">Logout</button>
+    <p class="text-white float-end mt-2 me-4"> Welcome  &nbsp;<%= Result.Name %></p>
+</div>
+</div>
+<div id="">
+
+</div>
+</body>
+
+<script>
+    $(document).ready(function(){
+           $('#PersonalDetails').click(function(){
+               $('#Content').load('/entranceExamination/EntranceExamRegistrationPD?Email='+'<%= Result.Email%>')
+           })
+           $('#Documents').click(function(){
+               $('#Content').load('/entranceExamination/entranceExamUploadPhoto?Email='+'<%= Result.Email%>')
+           })
+           $('#Payments').click(function(){
+               $('#Content').load('/entranceExamination/entranceExamFees?Email='+'<%= Result.Email%>')
+           })
+           $('#FinalPrint').click(function(){
+               alert('Successfully Submit Form')
+               $('body').load('/entranceExamination/entranceExamFinalPrint?Email='+'<%= Result.Email%>')
+           })
+           $('#Logout').click(function(){
+             $.ajax({
+                url:'/entranceExamination/entranceExamDashBoardLogout',
+                type:'Get',
+                success:function(data){alert('Successfully Logout')
+                 window.location='/entranceExamination/'
+            }
+             })
+           })
+    })
+</script>

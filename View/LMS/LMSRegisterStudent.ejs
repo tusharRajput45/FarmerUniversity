@@ -1,0 +1,177 @@
+<%- include('../Layout/bootstrap') %>
+<title>LMS Dashboard</title>
+<center><u><h2 class="mt-5">LMS Varified Student</h2></u></center>
+<table class="table mt-5">
+    <tr class="bg-dark text-light">
+        <th>S.NO</th>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>College ID</th>
+        <th>Register Date</th>
+        <th>Issued Book</th>
+        <th colspan="7">Action</th>
+        <th colspan="7"><input type="search" name="" id="" class="form-control" placeholder="Search"></th>
+    </tr>
+   <% Result.forEach(function(Result,index) { %>
+     <%if(Result.LMSAdminVarify===1){%>
+    <tr class="bg-light">
+        <th><%= index+1 %></th>
+        <th><%= Result.Name %></th>
+        <th><%= Result.Email %></th>
+        <th><%= Result.CollegeID %></th>
+        <th><%= Result.RegisterDate %></th>
+        <th><%= Result.BookIssue %></th>
+        <th colspan="7"><button class="btn btn-danger" onclick="ViewDetails('<%= Result._id %>')" data-toggle="modal" data-target="#ViewDetailsModel">View Student</button></th>
+        <th><button class="btn btn-success" onclick="ViewBook('<%= Result.Email %>')" data-toggle="modal" data-target="#StudentIssuedBookModel">View Books</button></th>
+        <th colspan=""><button class="btn btn-Warning me-4 mt-1" onclick="StudentDelete('<%= Result._id %>')"  data-toggle="modal" data-target="#StudentDeleteModel"><i class="fa fa-trash" ></i></button></th>
+    </tr>
+   <%}%>
+   <%});%>
+</table>
+<div class="modal" id="StudentIssuedBookModel">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content"> 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Issued Books</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table">
+                 <tr class="bg-dark text-light">
+                    <th>Request No</th>
+                    <th>Book Name</th>
+                    <th>Book Author Name</th>
+                    <th>Book Issued Date</th>
+                    <th>Book Submit Date</th>
+                 </tr>
+                 <tr>
+                    <td id="RequestNo"></td>
+                    <td id="BookName"></td>
+                    <td id="BookauthorName"></td>
+                    <td id="BookIssuedDate"></td>
+                    <td id="BookSubmitDate"></td>
+                 </tr>
+            </table>
+                <div class="modal-footer mt-3">
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+</div>
+<div class="modal" id="ViewDetailsModel">
+  <div class="modal-dialog">
+    <div class="modal-content"> 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Student Details</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <table class="table">
+               <tr>
+                  <th>Student Name</th>
+                  <th id="Name"></th>
+               </tr>
+               <tr>
+                <th>College ID</th>
+                <th id="CollegeID"></th>
+             </tr>
+               <tr>
+                  <th>Mobile</th>
+                  <th id="Mobile"></th>
+               </tr> 
+               <tr>
+                  <th>Email</th>
+                  <th id="Email"></th>
+               </tr>
+                <tr>
+                  <th>Register Date</th>
+                  <th id="RegisterDate"></th>
+               </tr>
+               <tr>
+                <th>Register Time</th>
+                <th id="RegisterTime"></th>
+               </tr>
+               <tr>
+                 <th>LMS Admin Varify </th>
+                 <th id="Varify"></th>
+               </tr>
+          </table>
+        <button type="button" class="btn btn-danger mt-5 float-end me-3" data-dismiss="modal">Close</button>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<div class="modal" id="StudentDeleteModel">
+  <div class="modal-dialog">
+    <div class="modal-content"> 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Student Details</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <form action="" id="StudentDeleteReason">
+              <input type="text" name="_id" id="_id" class="form-control" hidden>
+              <input type="text" name="Reason" id="Reason" class="form-control" placeholder="Enter Reason" >
+              <button type="button" class="btn btn-danger mt-5 float-end" data-dismiss="modal">Close</button>
+              <button type="Submit" class="btn btn-Warning float-end mt-5 me-3" >Delete Student</button>
+          </form>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<script>
+
+    function ViewDetails(_id){
+         $.ajax({
+              url:'/LMS/LMSAdminViewStudent',
+              type:'get',
+              data:{'_id':_id},
+              success:function(Result){
+                    $('#Name').text(Result.Name)
+                    $('#CollegeID').text(Result.CollegeID)
+                    $('#Mobile').text(Result.Mobile)
+                    $('#Email').text(Result.Email)
+                    $('#RegisterDate').text(Result.RegisterDate)
+                    $('#RegisterTime').text(Result.RegisterTime)
+                    $('#Varify').text(Result.LMSAdminVarify)
+              }, 
+              error:function(){alert('Server Error')}
+           })
+    }
+    function ViewBook(Email){
+        console.log(Email);
+           $.ajax({
+              url:'/LMS/StudentIssuedBook',
+              type:'get',
+              data:{'Email':Email},
+              success:function(Result){
+                    
+              },
+              error:function(){alert('Server Error')}
+           })
+    }
+    function StudentDelete(_id){
+           $('#_id').val(_id)
+      
+    }
+    $('#StudentDeleteReason').submit(function(event){
+         event.preventDefault()
+          $.ajax({
+              url:'/LMS/LMSAdminStudentDelete',
+              type:'get',
+              data:$('#StudentDeleteReason').serialize(),
+              success:function(Result){alert(Result)}, 
+              error:function(){alert('Server Error')}
+           })
+    })
+</script>

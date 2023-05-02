@@ -1,0 +1,108 @@
+<%- include('../Layout/bootstrap') %>
+<title>LMS Dashboard</title>
+<center><u><h2 class="mt-5">Reject Request Book</h2></u></center>
+
+<table class="table mt-4">
+    <tr class="bg-dark text-light">
+        <th>Request NO</th>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Book Name</th>
+        <th>Status</th>
+        <th>Reject Date</th>
+        <th>Request Date</th>
+        <th colspan="9">Action</th>
+        <th colspan=""><input type="search" name="" id="" class="form-control" placeholder="Search"></th>
+    </tr>
+   <% Result.forEach(function(Result,index) { %>
+    <tr class="bg-light">
+        <th><%= Result.RequestNO %></th>
+        <th><%= Result.Name %></th>
+        <th><%= Result.Email %></th>
+        <th><%= Result.BookName %></th>
+        <th><%= Result.Status %></th>
+        <th><%= Result.BookRejectDate %></th>
+        <th><%= Result.RequestDate %></th>
+        <th colspan="9"><button class="btn btn-success" onclick="ViewDetails('<%= Result._id %>')" data-toggle="modal" data-target="#ViewDetailsModel">View Details</button></th>
+        <th colspan=""><button class="btn btn-Warning me-4 mt-1" onclick="RequestDelete('<%= Result._id %>')"><i class="fa fa-trash" ></i></button></th>
+    </tr>
+   <%});%>
+</table>
+<div class="modal" id="ViewDetailsModel">
+  <div class="modal-dialog">
+    <div class="modal-content"> 
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Request Details</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <table class="table">
+              <tr>
+                  <th>Request NO</th>
+                  <th id="RequestNO"></th>
+               </tr>
+               <tr>
+                  <th>Name</th>
+                  <th id="Name"></th>
+               </tr>
+               <tr>
+                <th>College ID</th>
+                <th id="CollegeID"></th>
+             </tr>
+               <tr>
+                  <th>Book Name</th>
+                  <th id="BookName"></th>
+               </tr> 
+               <tr>
+                  <th>Book Auhtor Name</th>
+                  <th id="BookAuthorName"></th>
+               </tr>
+                <tr>
+                  <th>Reject Reason</th>
+                  <th id="RejectReason"></th>
+               </tr>
+               <tr>
+                  <th>Reject Date</th>
+                  <th id="RejectDate"></th>
+               </tr>
+          </table>
+          <button type="button" class="btn btn-danger mt-5 float-end me-3" data-dismiss="modal">Close</button>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<script>
+    function RequestDelete(_id){
+       $.ajax({
+        url:'/LMS/LMSAdminStudentRequestDelete',
+        type:'post',
+        data:{'_id':_id},
+        success:function(Result){
+          alert(Result)
+          location.reload()
+        },
+        error:function(err){alert('Server Error')},
+       })
+    }
+    function ViewDetails(_id){
+      $.ajax({
+        url:'/LMS/LMSRejectRequestDetails',
+        type:'post',
+        data:{'_id':_id},
+        success:function(Result){
+          $('#RequestNO').text(Result.RequestNO)
+          $('#Name').text(Result.Name)
+          $('#CollegeID').text(Result.CollegeID)
+          $('#BookName').text(Result.BookName)
+          $('#BookAuthorName').text(Result.BookAuthorName)
+          $('#RejectReason').text(Result.BookRejectReason)
+          $('#RejectDate').text(Result.BookRejectDate)
+        },
+        error:function(){alert('Server Error')}
+      })
+    }
+</script>

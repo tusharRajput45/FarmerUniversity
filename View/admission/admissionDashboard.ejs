@@ -1,0 +1,137 @@
+<title>Condidate Dashboard</title>
+<%- include('../Layout/bootstrap')%>
+<style>
+   #menubar{
+      padding:20px;
+      margin-top: -5px;
+   }
+   #menubar ul li{
+          list-style: none;
+          float: left;
+          margin-top: -4px;
+          margin-left: 15px;
+   }
+   #menubar ul li a{
+      color: white;
+      padding: 17.5px;
+   }
+   #menubar ul li a:hover{
+      background-color: palevioletred;
+      padding: 17.5px;
+   }
+   #menubar ul li .active{
+      background-color: rgb(0, 81, 255);
+      padding: 17.5px;
+   }
+</style>
+<body class="bg-light w-100">
+   <div id="header" class="mt-1">
+        <center><p class="fs-3">Admission Application Form</p></center>
+        <center><p class="fs-5" style="margin-top: -8px;">Session ( 2023-24 )</p></center>
+   </div>
+   <div id="menubar" class="bg-dark">
+      <ul>
+         <li><a href="#" class="active"><i class="img fa-solid fa-home fa-flip"></i> &nbsp;Home</a></li>
+         <li><a href="javaScript:void(0)"data-toggle="modal" data-target="#ChangeApplicationPasswordModel">Change Password</a></li>
+         <li><a href="#">Register Query</a></li>
+         <li><a href="javaScript:void(0)"data-toggle="modal" data-target="#ApplicationLogoutModel">Logout Application</a></li>
+      </ul>
+   </div>
+   <div>
+      <div class="row w-100 mt-3">
+         <div class="col-sm-75 border me-3 ml-3" id="sidebar" style="width: 25%;">
+             <p class="fs-5 border p-2 text-primary m-0 ">Activities</p>
+             <div class="border p-2 pl-3 m-1"><i class="fa-solid fa-clock"></i>&nbsp; Registration Form</div>
+             <div class="border p-2 pl-3 m-1"><i class="fa-solid fa-clock"></i>&nbsp; Application Form</div>
+             <div class="border p-2 pl-3 m-1"><i class="fa-solid fa-clock"></i>&nbsp; Fee Payment</div>
+             <p class="fs-5 border p-2 text-primary m-0 ">Varify Email & Mobile No </p>
+             <div class="border p-2 pl-3 m-1"><i class="fa-solid fa-clock"></i>&nbsp; Email</div>
+             <div class="border p-2 pl-3 m-1 mb-4"><i class="fa-solid fa-clock"></i>&nbsp; Mobile No</div>
+
+
+         </div>
+         <div class="col">
+            <p class="float-end text-danger me-5"><strong>Application NO :</strong> 48754578945</p>
+            <p class="text-danger"><strong>Name :</strong>  TUSHAR RAJPUT 
+               <strong class="ml-5">Admission Course :</strong>  BCA
+               <strong class="ml-5">Admission type :</strong>  Regular
+            </p>
+            <div class="border" id="Content">
+             <p class="fs-5 border p-2 text-primary m-0">Current Status</p>
+             <div class="mt-1">
+               <table class="table">
+                  <tr>
+                     <th>Registration Form</th>
+                     <th>Completed</th>
+                  </tr>
+                  <tr>
+                     <th>Application Form</th>
+                     <th class="text-danger">Incomplete</th>
+                  </tr>
+                  <tr>
+                     <th>Fee Submit</th>
+                     <th class="text-danger">Incomplete</th>
+                  </tr>
+               </table>
+               <div class="border " style="margin-top: -12px;">
+                  <p class="p-3 text-center">Your registration for admission 2023-24  in Tech Farmer University is complete. Your application form will remain Incomplete till you fill all the filds of application and pay the fee. 
+                     Please node down the Application No. for future reference</p>
+                  <p class="fs-5 text-center">Application Number : <strong class="text-primary">48754578945</strong></p>
+                  <p class="text-center">Kindly fill application form by clicking on button below</p>
+                  <center><button class="btn btn-primary mb-4" id="ApplicationForm">Complete Application Form</button></center>
+                </div>
+             </div>
+             
+            </div>
+         </div>
+      </div>
+   </div>
+   <%- include('../layout/Footer')%>
+</body>
+<div class="modal fade" id="ApplicationLogoutModel">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title">Application Logout</h5>
+         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+           <div class="modal-footer mt-3 text-center">
+             <button class="btn btn-success" id="LogoutApplication">Logout Application</button>
+             <button class="btn btn-danger" data-dismiss="modal">Close</button>
+           </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="modal fade" id="ChangeApplicationPasswordModel">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title">Change Application Password</h5>
+         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+         <form action="" id="ChangeApplicationPassword">
+            <input type="text" name="ApplicationNO" class="form-control" value="48754578945" hidden>
+            <input type="password" name="Password" class="form-control mt-3" placeholder="Enter Password">
+            <input type="password" name="ComfirmPassword" class="form-control mt-3" placeholder="Enter Comfirm Password">
+
+           <div class="modal-footer mt-3 text-center">
+             <button class="btn btn-success" >Save</button>
+             <button class="btn btn-danger" data-dismiss="modal">Close</button>
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
+ <script>
+   $('document').ready(function(){
+      $('#ApplicationForm').click(function(){
+         $('#Content').load('/Admission/admissionEducationDetails')
+      })
+   })
+
+
+ </script>

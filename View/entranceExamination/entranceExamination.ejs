@@ -1,0 +1,225 @@
+<title>Exam Login</title>
+<body id="Body">
+  <%- include('../Layout/logo') %>
+  <%- include('../Layout/bootstrap') %>
+  
+<hr style="margin-top: 5%;">
+<div id="content">
+<div class="row m-0">
+    <div class="col ml-3">
+      <h3 class="text-center text-danger" hidden id="Error"></h3>
+        <form autocomplete="off" class="form-group" id="recordLogin">
+            <div class="container">
+            <div class="col-sm-8 mt-5">
+                <input type="Email" name="Email" id="EmailLogin" value="tusharrajput919@gmail.com" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="col-sm-8 mt-5">
+                <input type="password" name="Password" id="PasswordLogin" value="9548574169" class="form-control" minlength="5" placeholder="Password"  minlength="5" required>
+            </div>
+            <input type="checkbox" name="" class="ml-3 mt-5" id="requiredLogin" required >&nbsp; &nbsp; I am Register
+            <div class="mt-5">
+                <input type="submit" value="Login" id="Login" class="btn btn-warning ml-3">
+                <input type="button" value="Forget Password" id="" class="btn btn-primary ml-3" data-toggle="modal" data-target="#ForgetPasswordModel">
+            </div></div>
+        </form>
+
+    </div>
+    <div class="col border me-5">
+        <h4 class="text-danger text-center ">Instruction For Entrance Test</h4>
+        <div class="container mt-3 ">
+          <h6>I should be 60% in 10th,12th and Guration</h6>
+          <h6>I should be 60% in 10th,12th and Guration</h6>
+          <h6>I should be 60% in 10th,12th and Guration</h6>
+          <h6>I should be 60% in 10th,12th and Guration</h6>
+          <h6>I should be 60% in 10th,12th and Guration</h6>
+          <h6>I should be 60% in 10th,12th and Guration</h6>
+          <h6>I should be 60% in 10th,12th and Guration</h6>
+        </div>
+        <div class="float-end mt-4 me-3">
+          <button class="btn btn-danger me-3" data-toggle="modal" data-target="#EmailVarify">Varify Email</button>
+          <button type="button" class="btn btn-warning" data-toggle="modal"  data-target="#PaymentStatus">Payment Status</button>
+        </div>
+        <div class="mt-4 me-3">
+            <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#myModal">
+                New Register
+            </button>
+    </div>
+    
+</div>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Entrance Exam Register</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form  method="post" class="form-group" id="addRecord" autocomplete="off">
+                <input type="text" name="Name" id="" placeholder="Name" class="form-control mt-3" required>
+                <input type="email" name="Email" id=""placeholder="Email" class="form-control mt-3" required>
+                <input type="tel" name="Mobile" id="" placeholder="Mobile"class="form-control mt-3" minlength="10" maxlength="10" required>
+                <input type="password" name="Password" id=""placeholder="Password" class="form-control mt-3" minlength="5" required>
+                <input type="checkbox" name="Iamagree" class="mt-5" id="Iamagree" required>&nbsp; &nbsp; I am Register
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="EmailVarify">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Email Varify</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="SendEmail" autocomplete="off">
+                <input type="email" name="Email" id=""placeholder="Email" class="form-control mt-3" required>
+                <input type="checkbox" name="IamVarify" class="mt-5" id="IamVarify" required>&nbsp; &nbsp; I am Register
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="PaymentStatus">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Payment Status</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="FeesPayment" autocomplete="off">
+                <input type="text" name="RegistrationNO" placeholder="RegistrationNO" class="form-control mt-3" required>
+                <div class="modal-footer mt-5">
+                  <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="ForgetPasswordModel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Forget Password </h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="ForgetPassword" autocomplete="off">
+                <input type="email" name="Email" id=""placeholder="Email" class="form-control mt-3" required>
+                <input type="password" name="Password" id=""placeholder="New Password" class="form-control mt-3" required>
+                <input type="checkbox" name="IamVarify" class="mt-5" id="IamVarify" required>&nbsp; &nbsp; I am Register
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
+ 
+<script>
+    $(document).ready(function(){
+  console.log("Event");
+  $('#addRecord').submit(function(event){
+    $.ajax({
+    url:'/entranceExamination/PostentranceExamRegister',
+    type:'post',
+    data:$('#addRecord').serialize(),
+    success:function(result){alert(result)},
+    error:function(err){alert('Server Error')}
+})
+event.preventDefault();
+  })
+
+// login by Ajax
+  $('#recordLogin').submit(function(event){
+    $.ajax({
+    url:'/entranceExamination/entranceExamRegisterLogin',
+    type:'post',
+    data:$('#recordLogin').serialize(),
+    success:function(result){
+      const value = result.match(/@/);
+      if(value){
+        alert('Successfully Login')
+        window.location='/entranceExamination/entranceExamDashboard?Email='+result;
+      }else{
+      $("#Error").removeAttr("hidden").css('visibility','visible');
+      $('#Error').html(result)}
+    },
+    error:function(err){alert('Server Error')}
+})
+event.preventDefault();
+  })
+$('#SendEmail').submit(function(event){
+    $.ajax({
+    url:'/entranceExamination/PostentranceExamRegisterEmailVarify',
+    type:'post',
+    data:$('#SendEmail').serialize(),
+    success:function(result){alert(result)},
+    error:function(err){alert('Server Error')}
+})
+event.preventDefault();
+  })
+})
+   $('#FeesPayment').submit(function(event){
+    $.ajax({
+    url:'/entranceExamination/entranceExamFeesPaymentStatus',
+    type:'post',
+    data:$('#FeesPayment').serialize(),
+    success:function(result){
+      // alert(result)
+      window.location="/entranceExamination/entranceExamFeesPaymentStatus?Email="+result;
+    },
+    error:function(err){alert('Server Error')}
+})
+event.preventDefault();
+  })
+  $('#ForgetPassword').submit(function(event){
+    $.ajax({
+    url:'/entranceExamination/entranceRegisterForgetPassword',
+    type:'post',
+    data:$('#ForgetPassword').serialize(),
+    success:function(result){
+      alert(result)
+    },
+    error:function(err){alert('Server Error')}
+})
+event.preventDefault();
+  })
+
+</script>

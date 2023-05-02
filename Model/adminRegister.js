@@ -1,0 +1,51 @@
+const { default: mongoose, Schema } = require("mongoose");
+
+const AdminSchema=mongoose.Schema({
+    Name:{
+        type:String,
+        require:true,
+        uppercase:true,
+    },
+    Email:{
+        type:String,
+        require:true,
+        unique:true
+    },
+    Mobile:{
+        type:Number,
+        require:true,
+        unique:true
+    },
+    Password:{
+        type:String,
+        require:true,
+    },
+    RegisterDate:{
+        type:String,
+        require:true,
+        uppercase:true,
+    },
+    RegisterTime:{
+        type:String,
+        require:true,
+        unique:true
+    },
+    Varified:{
+        type:Number,
+        default:0,
+    },
+    Login_Date:{
+        type:String,
+        default:0,
+    },
+    Login_Time:{
+        type:String,
+        default:0,
+    },
+    Login_Varified:{
+        type:Number,
+        default:0,
+    },
+})
+const AdminRegister=mongoose.model('AdminRegister',AdminSchema)
+module.exports=AdminRegister

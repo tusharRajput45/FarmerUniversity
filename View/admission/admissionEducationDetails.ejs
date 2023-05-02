@@ -1,0 +1,241 @@
+<title>Admission Dashboard</title>
+<%- include('../Layout/bootstrap')%>
+<div class="" id="Main-Content">
+     <form action="" class="">
+      <div class="steps-wrapper">
+        <div class="step" id="FristForm" style="height: 87%;">
+             <div class="container">
+                <div class="row">
+                <h3 class="p-3 text-danger">High School Education Details</h3>
+                    <div class="col mt-4">
+                        <div class="me-3">
+                            <label for="">Student Name</label>
+                            <input type="text" name="" id="" class="form-control mt-2 text-capitalize" placeholder="Enter Student Name" required>
+                         </div>
+                         
+                         <div class="mt-4 me-3">
+                           <label for="">Board Name</label>
+                           <input type="text" name="HighBoardName" id="HighBoardName" class="form-control text-uppercase mt-2" placeholder="Enter Board Name" required>
+                         </div>
+                         <div class="mt-4 me-3">
+                           <label for="">MarkSheet Serial NO</label>
+                           <input type="text" name="" id="" class="form-control mt-2" placeholder="Enter MarkSheet Serial NO " required>
+                         </div>
+                        
+                    </div>
+                    <div class="col mt-4">
+                        <div class="me-3">
+                            <label for="">Father's Name</label>
+                            <input type="text" name="" id="" class="form-control text-capitalize mt-2" placeholder="Enter Father's Name" required>
+                         </div>
+                         <div class="mt-4 me-3">
+                            <label for="">High School Roll NO</label>
+                            <input type="text" name="" id="" class="form-control mt-2" placeholder="Enter Roll NO" required>
+                         </div>
+                         
+                         <div class="mt-4 me-3">
+                           <label for="">MarkSheet Certificate NO</label>
+                           <input type="text" name="" id="" class="form-control mt-2" placeholder="Enter MarkSheet Certificate NO" required>
+                        </div>
+                         
+                    </div>
+                    <div class="col mt-4">
+                     <div class="me-3">
+                        <label for="">Mother's Name</label>
+                        <input type="text" name="" id="" class="form-control text-capitalize mt-2" placeholder="Enter Mother's Name" required>
+                     </div>
+                     <div class="mt-4 me-3">
+                        <label for="">High School Name</label>
+                        <input type="text" name="" id="" class="form-control text-capitalize mt-2" placeholder="Enter School Name" required>
+                      </div>
+                      <div class="mt-4 me-3">
+                        <label for="">High Passed Year</label>
+                        <input type="text" name="HighPassedYear" id="HighPassedYear" class="form-control  mt-2" placeholder="Enter Passed Year" required>
+                     </div>
+                    </div>
+                </div>
+                <div style="margin-top: 10%;">
+                  <hr class="">
+                  <button class="btn btn-danger float-end me-5 Next" type="button">Next</button>
+                </div>
+             </div>
+        </div>
+        <div class="step" id="SecondForm"style="height: 87%;">
+             <div class="container">
+                <div class="row">
+                    <h3 class="p-3 text-danger">Intermediate Education Details</h3>
+                        <div class="col mt-4">
+                            <div class="me-3">
+                                <label for="">Student Name</label>
+                                <input type="text" name="InterStudentName" id="InterStudentName" class="form-control text-capitalize mt-2" placeholder="Enter Student Name" required>
+                             </div>
+                             
+                             <div class="mt-4 me-3">
+                               <label for="">Board Name</label>
+                               <input type="text" name="InterBoardName" id="InterBoardName" class="form-control text-uppercase mt-2" placeholder="Enter Board Name" required>
+                             </div>
+                             <div class="mt-4 me-3">
+                               <label for="">MarkSheet Serial NO</label>
+                               <input type="text" name="InterSerialNO" id="InterSerialNO" class="form-control  mt-2" placeholder="Enter MarkSheet Serial NO " required>
+                             </div>
+                             
+                        </div>
+                        <div class="col mt-4">
+                            <div class="me-3">
+                                <label for="">Father's Name</label>
+                                <input type="text" name="InterFatherName" id="InterFatherName" class="form-control text-capitalize mt-2" placeholder="Enter Father's Name" required>
+                             </div>
+                             <div class="mt-4 me-3">
+                                <label for="">Intermediate Roll NO</label>
+                                <input type="text" name="InterRollNO" id="InterRollNO" class="form-control mt-2" placeholder="Enter Roll NO" required>
+                             </div>
+                             <div class="mt-4 me-3">
+                               <label for="">MarkSheet Certificate NO</label>
+                               <input type="text" name="InterCertificateNO" id="InterCertificateNO" class="form-control mt-2" placeholder="Enter MarkSheet Certificate NO" required>
+                             </div>
+                        </div>
+                        <div class="col mt-4">
+                           <div class="me-3">
+                              <label for="">Mother's Name</label>
+                              <input type="text" name="InterMotherName" id="InterMotherName" class="form-control text-capitalize mt-2" placeholder="Enter Mother's Name" required>
+                           </div>
+                           <div class="mt-4 me-3">
+                              <label for="">Intermediate School Name</label>
+                              <input type="text" name="InterSchoolName" id="InterSchoolName" class="form-control text-capitalize mt-2" placeholder="Enter School Name" required>
+                           </div>
+                           <div class="mt-4 me-3">
+                              <label for="">Intermediate Passed Year</label>
+                              <input type="text" name="InterPassedYear" id="InterPassedYear" class="form-control  mt-2" placeholder="Enter Passed Year" required>
+                           </div>
+                        </div>
+                </div>
+                <div style="margin-top: 10%;">
+                  <hr class="mt-5">
+                  <button class="btn btn-warning Prev" type="button">Previous</button>
+                  <button class="btn btn-danger float-end me-5 Next" type="button">Next</button>
+                </div>  
+            </div>
+        </div>
+        <div class="step" id="ThirdForm" style="height: 87%;">
+            <div class="container">
+                <div class="row">
+                    <h3 class="p-3 text-danger">Last Year Course Details</h3>
+                      <div class="mt-3">
+                        <div class="row">
+                           <div class="col">
+                              <label for="">Guration Not Complete</label> &nbsp;
+                              <input type="checkbox" name="" id="GurationCourseValue" onchange="Value()">
+                           </div>
+                           <div class="col">
+                              <div class="me-3">
+                              <select name="GurationCourse" id="GurationCourse" class="form-control" required>
+                                 <option value="">Select Guration Course</option>
+                                 <option value="BCA">BCA</option>
+                                 <option value="BBA">BBA</option>
+                                 <option value="B.Sc">B.Sc</option>
+                                 <option value="B.Com">B.Com</option>
+                                 <option value="B.A">B.A</option>
+                                 <option value="B.Tech">B.Tech</option>
+                              </select>
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+                        <div class="col mt-4">
+                            <div class="me-3">
+                                <label for="">Student Name</label>
+                                <input type="text" name="GurationStudentName" id="GurationStudentName" class="form-control text-capitalize mt-2" placeholder="Enter Student Name"required>
+                             </div>
+                             
+                             <div class="mt-4 me-3">
+                                <label for="">University Name</label>
+                                <input type="text" name="GurationUniversityName" id="GurationUniversityName" class="form-control text-capitalize mt-2" placeholder="Enter University Name"required>
+                             </div>
+                             <div class="mt-4 me-3">
+                                <label for="">MarkSheet Serial NO</label>
+                                <input type="text" name="GurationSerialNO" id="GurationSerialNO" class="form-control  mt-2" placeholder="Enter MarkSheet Serial NO " required>
+                           </div>
+                        </div>
+                        <div class="col mt-4">
+                            <div class="me-3">
+                                <label for="">Father's Name</label>
+                                <input type="text" name="GurationFatherName" id="GurationFatherName" class="form-control text-capitalize mt-2" placeholder="Enter Father's Name"required>
+                             </div>
+                             <div class="mt-4 me-3">
+                                <label for="">Roll NO</label>
+                                <input type="text" name="GurationRollNO" id="GurationRollNO" class="form-control mt-2" placeholder="Enter Roll NO" required>
+                             </div>
+                             <div class="mt-4 me-3">
+                              <label for="">MarkSheet Certificate NO</label>
+                              <input type="text" name="GurationCertificateNO" id="GurationCertificateNO" class="form-control  mt-2" placeholder="Enter MarkSheet Certificate NO" required>
+                           </div>
+                        </div>
+                        <div class="col mt-4">
+                           <div class="me-3">
+                              <label for="">Mother's Name</label>
+                              <input type="text" name="GurationMotherName" id="GurationMotherName" class="form-control text-capitalize mt-2" placeholder="Enter Mother's Name"required>
+                           </div>
+                           <div class="mt-4 me-3">
+                              <label for="">College Name</label>
+                              <input type="text" name="GurationCollegeName" id="GurationCollegeName" class="form-control text-capitalize mt-2" placeholder="Enter College Name"required>
+                           </div>
+                           <div class="mt-4 me-3">
+                              <label for="">Passed Year</label>
+                              <input type="text" name="GurationPassedYear" id="GurationPassedYear" class="form-control mt-2" placeholder="Enter Passed Year" required>
+                           </div>
+                        </div>
+                </div>
+                  <hr class="mt-5">
+                  <button class="btn btn-warning Prev" type="button">Previous</button>
+                  <button class="btn btn-success me-5 float-end" type="submit" onclick="NextStep()">Save</button>
+            </div>
+        </div>
+      </div>
+      </form>
+</div>
+<style>
+.steps-wrapper{
+   display:flex;
+   overflow-x: hidden;
+}
+.step{
+    min-height:50%;
+    min-width: 100%;
+    top: 0;
+}
+</style>
+<script>
+   $(".Next").click(function(){
+       var scrollWidth=$('.step').width();
+       var wrapperPos=$(".steps-wrapper").scrollLeft();
+       console.log("Scroll Width"+scrollWidth+"scroll pos"+wrapperPos);
+       $(".steps-wrapper").animate({
+               scrollLeft:wrapperPos+scrollWidth
+       },20)
+   })
+   $(".Prev").click(function(){
+       var scrollWidth=$('.step').width();
+       var wrapperPos=$(".steps-wrapper").scrollLeft();
+       console.log("Scroll Width"+scrollWidth+"scroll pos"+wrapperPos);
+       $(".steps-wrapper").animate({
+               scrollLeft:wrapperPos-scrollWidth
+       },20)
+   })
+   function Value(){
+         $('#GurationCourse').html('<option value="NA">NA</option>')
+         $('#GurationStudentName').val('NA')
+         $('#GurationFatherName').val('NA')
+         $('#GurationMotherName').val('NA')
+         $('#GurationPassedYear').val('NA')
+         $('#GurationSerialNO').val('NA')
+         $('#GurationRollNO').val('NA')
+         $('#GurationCollegeName').val('NA')
+         $('#GurationUniversityName').val('NA')
+         $('#GurationCertificateNO').val('NA')
+   }
+   function NextStep(){
+               $('#FormContent').load('/admission/admissionAddressDetails')
+               $('#AddressDetails').removeClass('btn-danger')
+               $('#AddressDetails').addClass('btn-primary')
+            }
+</script>

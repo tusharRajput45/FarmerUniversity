@@ -1,0 +1,95 @@
+<div class="">
+   <table class="table">
+        <tr>
+            <th>S.NO</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Register Date</th>
+            <th>Varified</th>
+            <th colspan="7">Action</th>
+        </tr>
+        <% if(Result.length>0){%>
+            <%for(i=0;i<Result.length;i++){%>
+            
+        <tr>
+            <td><%=[1+i]%> </td>
+            <td><%=Result[i].Name%></td>
+            <td><%=Result[i].Email%></td>
+            <td><%=Result[i].Mobile%></td>
+            <td><%=Result[i].RegisterDate%></td>
+            <td><%=Result[i].Varified%></td>
+            <td><button  class="btn btn-warning" id="EditRegister" onclick="EditRegister('<%= Result[i]._id %>')" data-toggle="modal"  data-target="#EditRegisterModel"><i class="fas fa-edit"></i></button></td>
+            <td><button  class="btn btn-danger"id="DeleteRegister" onclick="DeleteRegister('<%= Result[i]._id %>')"><i class="fa fa-trash"></i></button></td>
+        </tr>
+        <%}%>
+        <%}else{%>
+            <td>Data is not found</td>
+            <%}%>
+
+   </table>
+   <div class="modal" id="EditRegisterModel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Regiter </h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="EditRegiterForm" autocomplete="off">
+                <input type="text" name="Name" id="EditName"  class="form-control mt-3">
+                <input type="text" name="Email" id="EditEmail"  class="form-control mt-3">
+                <input type="text" name="Mobile" id="EditMobile"  class="form-control mt-3">
+                <input type="text" name="Varified" id="EditVarified" class="form-control mt-3">
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+        function EditRegister(data){
+            $.ajax({
+                url:'/admin/adminentranceExamEditRegister',
+                type:'post',
+                data:{'_id':data},
+                success:function(Result){
+                  console.log(Result);
+                  $('#EditName').val(Result.Name)
+                  $('#EditEmail').val(Result.Email)
+                  $('#EditMobile').val(Result.Mobile)
+                  $('#EditVarified').val(Result.Varified)
+                },
+                error:function(err){alert('Server Error')}
+              })
+        }
+        $('#EditRegiterForm').submit(function(event){
+          event.preventDefault()
+          $.ajax({
+                url:'/admin/PostadminentranceExamEditRegister',
+                type:'post',
+                data:$('#EditRegiterForm').serialize(),
+                success:function(Result){alert(Result)},
+                error:function(err){alert('Server Error')}
+              })
+        })
+
+        function DeleteRegister(data){
+            $.ajax({
+                url:'/admin/adminentranceExamDeleteRegister',
+                type:'post',
+                data:{'_id':data},
+                success:function(Result){alert(Result)},
+                error:function(err){alert('Server Error')}
+              })
+        }
+</script>
+

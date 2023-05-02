@@ -1,0 +1,104 @@
+<%- include('../Layout/bootstrap') %>
+<h1 class="display-6 text-center mt-4">Tech Farmer Payment Management</h1>
+<div class="container float-end">
+    <!-- For demo purpose -->
+    <div class="row mb-4">
+        <div class="col-lg-6 text-center">
+        </div>
+    </div> <!-- End -->
+    <div class="row">
+        <div class="col-lg-4 bg-dark " style="border-radius: 5px;">
+            <div class="bg-warning mt-5 p-3 text-center text-danger" style="font-size: 20px;"><%= Result.RegistrationNO %></div>
+            <div class="bg-warning mt-5 p-3 text-center text-danger" style="font-size: 20px;"><%= Result.Name%></div>
+            <div class="bg-warning mt-5 p-3 text-center text-danger" style="font-size: 20px;"><%= Result2.PaymentReferenceNO %></div>
+            <div class="bg-warning mt-5 p-3 text-center text-danger" style="font-size: 20px;"><%= Result2.PaymentAmount %></div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+                        <!-- Credit card form tabs -->
+                        <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                            <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
+                            <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fa-solid fa-qrcode"></i> Visa OR </a> </li>
+                            <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
+                        </ul>
+                    </div> <!-- End -->
+                    <!-- Credit card form content -->
+                    <div class="tab-content">
+                        <!-- credit card info-->
+                        <div id="credit-card" class="tab-pane fade show active pt-3">
+                            <form role="form" onsubmit="event.preventDefault()" id="paymentForm">
+                                <input type="text" name="RegistrationNO" id="" value="<%= Result.RegistrationNO %>" hidden>
+                                <input type="text" name="PaymentReferenceNO" id="" value="<%= Result2.PaymentReferenceNO %>" hidden>
+                                <input type="text" name="PaymentAmount" id="" value="<%= Result2.PaymentAmount %>" hidden>
+
+                                <div class="form-group"> <label for="username">
+                                        <h6>Card Owner</h6>
+                                    </label> <input type="text" name="OwnerName" placeholder="Card Owner Name" required class="form-control "> </div>
+                                <div class="form-group"> <label for="cardNumber">
+                                        <h6>Card number</h6>
+                                    </label>
+                                    <div class="input-group"> <input type="text" name="CardNO" placeholder="Valid card number" pattern="[0-9]{16}" maxlength="16"minlength='16' class="form-control " required>
+                                        <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group"> <label><span class="hidden-xs">
+                                                    <h6>Expiration Date</h6>
+                                                </span></label>
+                                            <div class="input-group">
+                                                 <input type="text" placeholder="MM" name="ExpireDate" class="form-control" maxlength="2"minlength='2' required>
+                                                 <input type="text" placeholder="YYYY" name="ExpireYear" class="form-control" maxlength="4"minlength='4' required> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                                <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                            </label> <input type="password" pattern="[0-9]{3}" required class="form-control" placeholder="CVV" maxlength="3"minlength='3'> </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer"> 
+                                    <button type="submit" class="subscribe btn btn-success btn-block shadow-sm"id="ComfirmPayment"> Confirm Payment </button>
+                            </form>
+                        </div>
+                    </div> <!-- End -->
+                    <!-- Paypal info -->
+                    <div id="paypal" class="tab-pane fade pt-3">
+                        <img src="/Kala.png" alt="" width="268px" height="267px">
+                        <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+                    </div> <!-- End -->
+                    <!-- bank transfer info -->
+                    <div id="net-banking" class="tab-pane fade pt-3">
+                        <div class="form-group "  style="height: 197px;"> <label for="Select Your Bank">
+                                <h6 class="mt-5">Select your Bank</h6>
+                            </label> <select class="form-control" id="ccmonth">
+                                <option value="" selected disabled>--Please select your Bank--</option>
+                            </select> </div>
+                        <div class="form-group">
+                            <center><p> <button type="button" class="btn btn-success"><i class="fas fa-mobile-alt mr-2"></i> Proceed Payment</button> </p></center>
+                        </div>
+                        <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+                    </div> <!-- End -->
+                    <!-- End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function() {
+          $('[data-toggle="tooltip"]').tooltip()
+         })
+         $('#ComfirmPayment').click(function(){
+            $.ajax({
+                url:'/entranceExamination/entranceExamPaymentCardDetails',
+                type:'POST',
+                data:$('#paymentForm').serialize(),
+                success:function(Result){
+                    alert(Result)
+                },
+                error:function(){alert('Server Error')}
+            })
+         })
+    </script>

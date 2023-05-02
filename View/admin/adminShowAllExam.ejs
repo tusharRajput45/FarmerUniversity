@@ -1,0 +1,126 @@
+<title>Admin dashboard</title>
+<div>
+  <input type="search" name="Search" id="Search" class="form-control w-25 float-end" placeholder="Search">
+<table class="table mt-5">
+   <tr>
+      <th>S.NO</th>
+      <th>Exam Name</th>
+      <th>Exam Type</th>
+      <th>Exam Date</th>
+      <th>Exam Duration</th>
+      <th>Varified</th>
+      <th>Action</th>
+   </tr>
+   <% Result.forEach(function(Result,index) { %>
+   <tr class="mt-0">
+    <td><%= index+1 %></td>
+    <td><%= Result.ExamName %></td>
+    <td><%= Result.ExamType %></td>
+    <td><%= Result.ExamDate %></td>
+    <td><%= Result.ExamTime %> Min</td>
+    <td><%= Result.Varified %></td>
+    <td><button class="btn btn-success" id="AddExamQ&A" data-toggle="modal"  data-target="#addExamQAModel"  onclick="AddQA('<%= Result._id %>')"><i class="fa-solid fa-question"></i></button></td>
+    <td><button class="btn btn-dark" id="AddExamQ&A" data-toggle="modal"  data-target="#ShowDetails"><i class="fa-solid fa-database"></i></button></td>
+    <td><button class="btn btn-warning" id="EditRegister" data-toggle="modal"  data-target="#EditExamModel" onclick="EditExam('<%= Result._id %>')"><i class="fas fa-edit"></i></button></td>
+    <td><button class="btn btn-danger" onclick="DeleteExam('<%= Result._id %>')"><i class="fa fa-trash" ></i></button></td>
+ </tr>
+ <% }); %>
+
+</table>
+</div>
+
+<div class="modal" id="EditExamModel">
+   <div class="modal-dialog">
+     <div class="modal-content"> 
+ 
+       <!-- Modal Header -->
+       <div class="modal-header">
+         <h4 class="modal-title">Add Exam </h4>
+         <button type="button" class="btn-close" data-dismiss="modal"></button>
+       </div>
+       <!-- Modal body -->
+       <div class="modal-body">
+           <form class="form-group" id="EditExam" autocomplete="off">
+               <input type="text" name="ExamID" id="ExamID" class="form-control mt-3" readonly hidden>
+               <input type="text" name="ExamName" id="ExamName" class="form-control mt-3" placeholder="Exam Name">
+               <select name="ExamType" class="form-control mt-3" id="" required>
+                   <option value="" id="ExamType"></option>
+                   <option value="">Select Exam Type</option>
+                   <option value="University Exam">University Exam</option>
+                   <option value="University Sessional Exam">University Sessional Exam</option>
+                   <option value="University Entrance Exam">University Entrance Exam</option>
+                   <option value="Other Exam">Other Exam</option>
+               </select>
+               <input type="time" name="ExamDate" id="ExamDate" placeholder="Exam Date" class="form-control mt-3">
+               <input type="text" name="ExamStartTime" id="ExamStartTime" placeholder="Exam Start Time" class="form-control mt-3">
+               <input type="time" name="ExamTime" id="ExamTime" placeholder="Exam Time" class="form-control mt-3">
+               <input type="text" name="ExamQuestion" id="ExamQuestion" placeholder="Question NO" class="form-control mt-3">
+               <input type="text" name="Varified" id="Varified" placeholder="Varified" class="form-control mt-3">
+
+               <div class="modal-footer mt-3">
+                 <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                 <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+             </div>
+           </form>
+       </div> 
+       <!-- Modal footer -->
+     </div>
+   </div>
+ </div>
+ <div class="modal" id="addExamQAModel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add Question & Answer </h4>
+        <button class="btn btn-success ml-5" id="add">Add Answer</button>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <form class="form-group" id="AddExamQA" autocomplete="off">
+              <input type="text" name="Question" id="" class="form-control mt-3" placeholder="Question" required>
+              <div id="dynamicadd">
+                <div class="Answers">
+                </div>
+              </div>
+              <div class="modal-footer mt-4">
+                <button type="submit" class="btn btn-warning mt-3" id="addAnswer">Submit</button>
+                <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<div class="modal" id="ShowDetails">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 120%;">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Details</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <table class="table">
+             <thead>
+                 <th>Exam Name</th>
+                 <th>Exam Start Time</th>
+                 <th>Question NO</th>
+                 <th>Register Date</th>
+                 <th>Register Time</th>
+
+             </thead>
+          </table>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+
+ <%- include('./Examination/adminShowAllExam') %>
+ 

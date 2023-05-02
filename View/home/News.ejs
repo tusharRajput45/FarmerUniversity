@@ -1,0 +1,23 @@
+<title>News</title>
+<%- include('../Layout/bootstrap') %>
+<body style="background-color: rgb(75, 75, 221);">
+    
+</body>
+<div id="header" class="bg-light mt-3 p-4">
+   <a href="/">
+        <h2 class="text-center text-danger ">Tech Farmer University , Srakar Chakrajmal</h2>
+        <u class="text-dark"><h4 class="text-dark text-center">College and Examination News</h4></u>
+   </a>
+</div>
+<div class="">
+     <div class="d-flex justify-content-between align-items-center breaking-news bg-dark p-3">
+         <marquee class="news-scroll" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();"> <a href="#" class="text-white">
+          Tech Framer University Entrance Exam Date Sheet Cooming Soon <sup class="text-danger">New</sup> 
+         </a> </marquee>
+     </div>
+ </div>
+<div id="Content" class="ml-5 me-5 mt-2">
+    <% for(var i=0;i<10;i++){%>
+      <a href="/Doc/" class="text-dark"><p class="bg-warning p-2">Tech Framer University Entrance Exam Date Sheet <sup class="text-danger">New</sup> <samp class="float-end me-5">20/03/2023</samp></p></a>
+     <%}%> 
+</div>

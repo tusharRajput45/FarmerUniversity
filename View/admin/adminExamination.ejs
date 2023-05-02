@@ -1,0 +1,65 @@
+<title>Admin DashBoard</title>
+<div class="w-100">
+  <div class="" id="Content"> 
+       <div class="Box bg-light w-100 h-100">
+             <div class="Link-Box" data-toggle="modal"  data-target="#addExamModel">
+                 <h3 class="mt-4 pt-2">Add Exam</h3>
+             </div>
+             <div class="Link-Box" data-toggle="modal" data-target="#addExamQAModel">
+                <h3>Add Examination Q&A</h3>
+            </div>
+            <div class="Link-Box pt-4" id="ShowAllExam">
+                <h3>Show All Exam</h3>
+            </div>
+            <div class="Link-Box bg-">
+                <h3>Add Examination Q&A Show</h3>
+            </div>
+       </div>
+  </div>
+</div>
+<div class="modal" id="addExamModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add Exam </h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="AddExam" autocomplete="off">
+                <input type="text" name="ExamName" class="form-control text-capitalize mt-3" placeholder="Exam Name" required>
+                <select name="ExamType" class="form-control text-capitalize mt-3" required>
+                    <option value="">Select Exam Type</option>
+                    <option value="University Exam">University Exam</option>
+                    <option value="University Sessional Exam">University Sessional Exam</option>
+                    <option value="University Entrance Exam">University Entrance Exam</option>
+                    <option value="Other Exam">Other Exam</option>
+                </select>
+                <input type="text" name="ExamDate" placeholder="Exam Date" class="form-control mt-3" required>
+                <input type="time" name="ExamStartTime" placeholder="Exam Start Time" class="form-control mt-3"required>
+                <input type="time" name="ExamTime" placeholder="Exam Time" class="form-control mt-3" required>
+                <input type="text" name="ExamQuestion" placeholder="Question NO" class="form-control mt-3" required>
+                <div id="DynamicSubject">
+                  <input type="text" name="ExamSubject[]" placeholder="Exam Subject" class="form-control text-capitalize mt-3" style="width: 90%;" required>
+                  <button type="button" class="btn btn-success float-end" style="margin-top: -8%;" id="AddSubject">+</button>  
+                </div>
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+
+<%- include('./Examination/adminExamination') %>
+<script>
+  function trueAnswer(v){
+    var index=v.rowIndex;
+    console.log(index);
+  }
+</script>

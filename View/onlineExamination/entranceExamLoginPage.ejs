@@ -1,0 +1,75 @@
+<title>Entrance Exam Login</title>
+<%- include('../Layout/logo') %>
+<%- include('../Layout/bootstrap') %>
+<hr class="mt-5">
+<style>
+    #Refresh{
+        cursor: pointer;
+    }
+</style>
+<body onload="Refresh()">
+<div>
+    <div class="row w-100">
+        <div class="col ml-5">
+            <form action="" id="FormSubmit" class="mt-5" autocomplete="off">
+                <input type="password" name="ExamKey" id="" value="123456789981" class="form-control w-50" minlength="12" maxlength="12" placeholder="Exam Key" required> <br><br>
+                <input type="password" name="Password" id="" value="954857" class="form-control w-50" minlength="6" maxlength="6" placeholder="Exam Key Password" required> <br><br>
+                <input type="text" name="" id="Captch" class="form-control w-50"minlength="6" maxlength="6" placeholder="Security Code" required> <br>
+                <div class="bg-dark text-white p-2 text-center w-25" id="CaptchValue"></div> <br><br>
+                 <div style="margin-top: -12%; margin-left: 30%;">
+                    <i class="fa fa-refresh" aria-hidden="true" id="Refresh" onclick="Refresh()"></i>
+                 </div>
+                <br><br>
+                 <button class="btn btn-danger">Exam Login</button>
+            </form>
+        </div>
+        <div class="col">
+              <div class="border pt-4 bg-light">
+                <center><h5 class="text-danger">Instruction</h5></center>
+                <div class="text-dark p-3">
+                    <p>Condiate Only Login in 2 times</p>
+                    <p>Condiate Only Login in 2 times</p>
+                    <p>Condiate Only Login in 2 times</p>
+                    <p>Condiate Only Login in 2 times</p>
+                    <p>Condiate Only Login in 2 times</p>
+                </div>
+              </div>
+        </div>   
+    </div>
+</div>
+</body>
+<script>
+    $('document').ready(function(){
+        $('#FormSubmit').submit(function(event){
+            event.preventDefault();
+            const Captch=$('#Captch').val()
+            const Random=$('#CaptchValue').text()
+            if (Captch===Random) {
+                $.ajax({
+                url:'/onlineExamination/ExamLoginPage',
+                type:'post',
+                data:$('#FormSubmit').serialize(),
+                success:function(Result){
+                    alert(Result)
+                },
+                error:function(error){
+                    alert('Server Error')
+                }
+            })
+            } else {
+                alert('Your Captch is wrong')
+                location.reload()
+            }
+           
+        })
+    })
+    function Refresh(){
+        var charsArray ="0123456789";
+        var index='';
+        for (var i = 0; i < 6; i++) {
+               index += charsArray[Math.floor(Math.random() * charsArray.length )];   
+            $('#CaptchValue').text(index)
+        }
+    }
+</script>
+

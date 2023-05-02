@@ -1,0 +1,60 @@
+<%- include('../Layout/Bootstrap') %>
+<title>Admission Registration</title>
+<style>
+    .Content{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+    }
+    #model{
+        padding: 40px;
+    }
+</style>
+<body>
+    <div class="Content">
+    <div id="model" class="bg-light border fs-5">
+        <p class="text-capitalize">Welcome <%= Result.Name %></p>
+        <p class="text-danger">Admission Registration Complete Successfully... !</p>
+        <p class="">Admission NO &nbsp; <strong><%= Result.AdmissionNO %></strong> </p>
+        <p class="mt-3 fs-6">( Note - Please Registration No and Password notedown )</p>
+        <button class="btn btn-success mt-3"data-toggle="modal" data-target="#VarifyModel" onclick="SendOTP('<%= Result.AdmissionNO %>')">Varify Email & Mobile</button>
+    </div>
+    </div>
+    <div class="modal" id="VarifyModel">
+        <div class="modal-dialog">
+          <div class="modal-content"> 
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Varify Email & Mobile</h4>
+              <button type="button" class="btn-close" data-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p class="fs-5">Email -<%= Result.Email %> &  Mobile  - <%= Result.Mobile %></p>
+                <a href="#" class="float-end" style="margin-top: -8%;">Resend OTP</a>
+                <form class="form-group mt-4" id="VarifyEmailMobile" autocomplete="off">
+                    <input type="text" name="EmailOTP" id="EmailOTP" maxlength="6" minlength="6" class="form-control mt-3"  pattern="[0-9]{6}" placeholder="Verify Email OTP" required>
+                    <input type="text" name="MobileOTP" id="MobileOTP" maxlength="6" minlength="6" class="form-control mt-3" pattern="[0-9]{6}" placeholder="Verify Mobile OTP" required>
+                    <div class="modal-footer mt-3">
+                      <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                      <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+                  </div>
+                </form>
+            </div> 
+            <!-- Modal footer -->
+          </div>
+        </div>
+    </div>
+</body>
+<script>
+  function SendOTP(AdmissionNO){
+     $.ajax({
+       url:'/Admission/EmailMobileSendOTP',
+       type:'post',
+       data:{'AdmissionNO':AdmissionNO},
+       success:function(Result){alert(Result)},
+       error:function(error){alert('Server Error')}
+     })
+  }
+</script>

@@ -1,0 +1,51 @@
+<title>Exam Login</title>
+<body id="Body">
+  <%- include('../Layout/logo') %>
+  <%- include('../Layout/bootstrap') %>
+  
+<hr style="margin-top: 5%;">
+<div id="content">
+<div class="row m-0">
+    <div class="col ml-3">
+      <h3 class="text-center text-danger" hidden id="Error"></h3>
+        <form autocomplete="off" class="form-group" id="recordLogin">
+            <div class="container">
+            <div class="col-sm-4 mt-5">
+                <input type="Email" name="Email" id="EmailLogin" value="tusharrajput919@gmail.com" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="col-sm-4 mt-5">
+                <input type="password" name="Password" id="PasswordLogin" value="9548574169" class="form-control" minlength="5" placeholder="Password"  minlength="5" required>
+            </div>
+            <input type="checkbox" name="" class="ml-3 mt-5" id="requiredLogin" required >&nbsp; &nbsp; I am Register
+            <div class="mt-5">
+                <input type="submit" value="Login" id="Login" class="btn btn-warning ml-3">
+            </div></div>
+        </form>
+
+    </div>
+</div>
+</div>
+</body>
+<script>
+    $(document).ready(function(){
+        $('#recordLogin').submit(function(event){
+            event.preventDefault()
+            $.ajax({
+                url:'/admin/',
+                type:'post',
+                data:$('#recordLogin').serialize(),
+                success:function(Result){
+                    const value = Result.match(/@/);
+                          if(value){
+                               alert('Successfully Login')
+                               window.location='/admin/adminDashboard?Email='+Result;
+                            }else{
+                          $("#Error").removeAttr("hidden").css('visibility','visible');
+                          $('#Error').html(Result)}
+                },
+                error:function(){alert('Server Error')}
+            })
+        })
+    })
+</script>
+

@@ -1,0 +1,96 @@
+<script>
+
+  //Delete Exam
+       function DeleteExam(_id){
+     $.ajax({
+      url:'/admin/DeleteExam',
+      type:'post',
+      data:{'_id':_id},
+      success:function(Result){
+        alert(Result)
+        location.reload()
+      },
+      error:function(){alert('Server Error')}
+     })
+  }
+  function EditExam(_id){
+     $.ajax({
+      url:'/admin/EditExam',
+      type:'get',
+      data:{'_id':_id},
+      success:function(Result){
+        $('.Remove').remove() 
+        $('#ExamName').val(Result.ExamName)
+        $('#ExamID').val(Result.ExamID)
+        $('#ExamType').val(Result.ExamType)
+        $('#ExamType').html(Result.ExamType)
+        $('#ExamDate').val(Result.ExamDate)
+        $('#ExamStartTime').val(Result.ExamStartTime)
+        $('#ExamTime').val(Result.ExamTime)
+        $('#ExamQuestion').val(Result.ExamQuestionNO)
+        $('#Varified').val(Result.Varified)
+      },
+      error:function(){alert('Server Error')}
+     })
+  }
+        $(document).ready(function(){
+  var i = 1;
+  $('#AddSubject').click(function(){
+  i++;
+  $('#DynamicSubject').append('<div id="removeSubject">'+
+                '<input type="text" name="ExamSubject[]" id="ExamSubject" placeholder="Exam Subject" class="form-control mt-3" style="width: 90%;" required>'+
+                '<button type="button" class="btn btn-danger float-end remove_Subject" style="margin-top: -8%;">-</button>'+
+                '</div>'
+              )
+  });
+
+  });
+  //Remove Aanwer Parent
+  $(document).on('click','.remove',function(){
+        $(this).parent().remove()
+    });
+
+    // Edit Exam  
+$('#EditExam').submit(function(event){
+      $.ajax({
+      url:'/admin/PostEditExam',
+      type:'post',
+      data:$('#EditExam').serialize(),
+      success:function(result){
+          alert(result)
+          location.reload()
+      },
+      error:function(err){alert('Server Error')}
+  })
+  event.preventDefault();
+    })
+$('#add').click(function(){
+  if ($('.Answers').length>=5) {
+      alert('Maximum Six Answer Add Only')
+    }else{   
+         $('#dynamicadd').append('<div id="removeAnswer" class="mt-4 Answers">'+
+           '<input type="radio" name="correct_Answer" id="" class="mt-2 correct_Answer">'+
+           '<input type="text" name="Answer[]" id="" class="form-control ml-4" style="width: 85%; margin-top: -5%;" placeholder="Answer" required>'+
+           '<button type="button" class="btn btn-danger float-end remove" style="margin-top:-8%;" id="Add">-</button>'+
+           '</div>'
+           )
+    }
+})
+$('#AddExamQA').submit(function(event){
+  event.preventDefault()
+  if ($('.Answers').length<2) {
+      alert('Three Answer add Minmum ')
+    } else {
+      var checkIsCorrect=false;
+      for (let i = 0; i < $('.correct_Answer').length; i++) {
+        if ($(".correct_Answer:eq("+i+")").prop('checked')==true) {
+           checkIsCorrect=true; 
+           const val=$(".correct_Answer:eq("+i+")").val($(".correct_Answer:eq("+i+")").next().find('input').val());
+           console.log(val);
+           console.log($(".correct_Answer:eq("+i+")").next().find('input').val());
+        }
+      }
+    }
+})
+  
+</script>

@@ -1,0 +1,134 @@
+<%- include('../Layout/bootstrap') %>
+<title>LMS Dashboard</title>
+<center><u><h2 class="mt-5">Issued Book</h2></u></center>
+<table class="table mt-5">
+    <tr class="bg-dark text-light">
+        <th>Request NO</th>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Book Name</th>
+        <th>Submit Date</th>
+        <th colspan="">Action</th>
+        <th colspan="7"><input type="search" name="" id="" class="form-control" placeholder="Search"></th>
+    </tr>
+   <% Result.forEach(function(Result,index) { %>
+    <tr class="bg-light">
+        <th><%= Result.RequestNO %></th>
+        <th><%= Result.Name %></th>
+        <th><%= Result.Email %></th>
+        <th><%= Result.BookName %></th>
+        <th><%= Result.SubmitDate %></th>
+        <th><button class="btn btn-success" onclick="ViewDetails('<%= Result._id %>')" data-toggle="modal" data-target="#ViewDetailsModel">View Details</button></th>
+        <th><button class="btn btn-danger" onclick="BookReturnRequest('<%= Result.Email %>')" data-toggle="modal" data-target="#BookReturnRequestModel">Book Return Request</button></th>
+    </tr>
+   <%});%>
+</table>
+  <div class="modal" id="ViewDetailsModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Request Details</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table table-hover">
+                <tr>
+                    <th>Request NO</th>
+                    <th id="RequestNO"></th>
+                 </tr>
+                 <tr>
+                    <th>Name</th>
+                    <th id="Name"></th>
+                 </tr>
+                 <tr>
+                  <th>College ID</th>
+                  <th id="CollegeID"></th>
+               </tr>
+                 <tr>
+                    <th>Book Name</th>
+                    <th id="BookName"></th>
+                 </tr> 
+                 <tr>
+                    <th>Book Auhtor Name</th>
+                    <th id="BookAuthorName"></th>
+                 </tr>
+                  <tr>
+                    <th>Submit Date</th>
+                    <th id="SubmitDate"></th>
+                 </tr>
+                 <tr>
+                   <th>Book Issued BookNO</th>
+                   <th id="BookIssueBookNO"></th>
+                 </tr>
+                 <tr>
+                   <th>Book Issued Date</th>
+                   <th id="IssueDate"></th>
+                 </tr>
+            </table>
+            <button type="button" class="btn btn-danger mt-5 float-end me-3" data-dismiss="modal">Close</button>
+          </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="BookReturnRequestModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Book Return Request</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="" id="RequestBookNO" autocomplete="off">
+              <input type="text" name="Email" id="Email" class="form-control" id="BookRequestID" hidden>
+              <input type="text" name="ReturnRequest" id="ReturnRequest" class="form-control"placeholder="Return Request" required>
+                 <button type="button" class="btn btn-danger mt-5 float-end me-3" data-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-success mt-5 float-end me-3">Return Request</button>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+<script>
+    // function RequestDelete(_id){
+    //    $.ajax({
+    //     url:'/LMS/LMSAdminStudentRequestDelete',
+    //     type:'post',
+    //     data:{'_id':_id},
+    //     success:function(Result){
+    //       alert(Result)
+    //       location.reload()
+    //     },
+    //     error:function(err){alert('Server Error')},
+    //    })
+    // }
+    function ViewDetails(_id){
+      $.ajax({
+        url:'/LMS/LMSAdminViewDetails',
+        type:'post',
+        data:{'_id':_id},
+        success:function(Result){
+          $('#RequestNO').text(Result.RequestNO)
+          $('#Name').text(Result.Name)
+          $('#CollegeID').text(Result.CollegeID)
+          $('#BookName').text(Result.BookName)
+          $('#BookAuthorName').text(Result.BookAuthorName)
+          $('#SubmitDate').text(Result.SubmitDate)
+          $('#BookIssueBookNO').text(Result.BookIssueBookNO)
+          $('#IssueDate').text(Result.BookIssuedDate)
+        },
+        error:function(){alert('Server Error')}
+      })
+    }
+    function BookReturnRequest(Email){
+      $('#Email').val(Email)
+    }
+</script>

@@ -1,0 +1,217 @@
+<title>Library Management System</title>
+<%- include('../Layout/Bootstrap') %>
+<body>
+    <div id="Header">
+        <center><h1 class="mt-3 text-danger">Tech Farmer University Library Management System<h1></center>
+    </div>
+    <hr class="mt-5">
+          <div style="margin-top: -15px;">
+              <div class="d-flex justify-content-between align-items-center breaking-news bg-dark p-3">
+                  <marquee class="news-scroll" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();"> <a href="#" class="text-white">
+                    Library Open 10.00 AM and Closed 5.00 PM
+                  </a> </marquee>
+              </div>
+          </div>
+    <div id="Content" class="mt-3">
+      <div class="row w-100">
+        <div class="col" id="LoginDiv">
+          <div id="LoginStudentDiv">
+          <h2 class="pl-5">Login Student</h2>
+            <h3 id="Error" class="text-danger mt-3" style="margin-left: 20%;"> </h3>
+            <form action="" id="LoginStudent" class="form-group w-50 ml-5" autocomplete="off">
+                <input type="email" name="Email" id="CollegeID" class="form-control mt-5" value="tusharrajput919@gmail.com" placeholder="College ID" required>
+                <input type="Password" name="Password" id="LoginPassword" class="form-control mt-5" value="9548574169" placeholder="Password" required>
+                <input type="checkbox" name="Agree" id="" class="mt-5" required> I am Register 
+                <br>
+                <button type="submit" class="btn btn-success mt-5">Login</button>
+                <button type="button" class="btn btn-primary mt-5 ml-4" data-toggle="modal" data-target="#ForgetPasswordModel">Forget Password</button>
+            </form>
+          </div>
+          <div id="LoginAdminDiv" hidden>
+            <h2 class="pl-5">Login Admin</h2>
+              <h3 id="AdminError" class="text-danger mt-3" style="margin-left: 20%;"> </h3>
+              <form action="" id="LoginAdmin" class="form-group w-50 ml-5" autocomplete="off">
+                  <input type="email" name="Email" id="LoginEmail" class="form-control mt-5" value="tusharrajput919@gmail.com" placeholder="Email" required>
+                  <input type="Password" name="Password" id="LoginPassword" class="form-control mt-5" value="9548574169" placeholder="Password" required>
+                  <input type="checkbox" name="Agree" id="" class="mt-5" required> I am Register 
+                  <br>
+                  <button type="submit" class="btn btn-success mt-5">Login</button>
+              </form>
+            </div>
+        </div>
+        <div class="col">
+          <button class="btn btn-warning float-end" id="LibraryAdminLogin" onclick="LibraryAdminLogin()">Library Admin Login</button>
+          <button class="btn btn-success float-end me-4" id="LibraryStudentLogin" onclick="LibraryStudentLogin()">Library Student Login</button>
+          <div class="border mt-5 p-3">
+            <div id="instruction" class="mt-3">
+                 <center><h3 class="text-danger">Library Instruction</h3></center>
+                 <h6 class="mt-4">  Mobile and Laptop use without sound in Library</h6>
+                 <h6>  Mobile and Laptop use without sound in Library</h6>
+                 <h6>  Mobile and Laptop use without sound in Library</h6>
+                 <h6>  Mobile and Laptop use without sound in Library</h6>
+                 <h6>  Mobile and Laptop use without sound in Library</h6>
+                 <h6>  Mobile and Laptop use without sound in Library</h6>
+                 <h6>  Mobile and Laptop use without sound in Library</h6>
+                 <h6>  Mobile and Laptop use without sound in Library</h6>
+                 <button class="btn btn-danger mt-3" data-toggle="modal" data-target="#NewRegisterModel">New Register</button>
+                 <button class="btn btn-warning mt-3 ml-3" data-toggle="modal" data-target="#EmailVarifyModel">Email Varify</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</body>
+<div class="modal" id="ForgetPasswordModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Forget Password</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="LMSLoginPasswordForget" autocomplete="off">
+                <input type="text" name="Email" id="Email" class="form-control mt-3" placeholder="Email" required>
+                <input type="text" name="Password" id="Password" class="form-control mt-3" placeholder="New Password" required>
+                <input type="checkbox" name="Agree" id="" class="mt-4" required> I am Register
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="EmailVarifyModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Email Varify</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="LMSLoginEmailVarify" autocomplete="off">
+                <input type="text" name="Email" id="Email" class="form-control mt-3" placeholder="Email" required>
+                <input type="checkbox" name="Agree" id="" class="mt-4" required> I am Register
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="NewRegisterModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">New Register</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="LMSRegister" autocomplete="off">
+                <input type="text" name="Name" id="Name" class="form-control mt-3" placeholder="Student Name" required>
+                <input type="text" name="Email" id="Email" class="form-control mt-3" placeholder="Student Email" required>
+                <input type="text" name="Mobile" id="Mobile" class="form-control mt-3" placeholder="Student Mobile" maxlength="10" minlength="10" required>
+                <input type="text" name="CollegeID" id="CollgeID" class="form-control mt-3" placeholder="Collge ID" required>
+                <input type="password" name="Password" id="Password" class="form-control mt-3" placeholder="Password" required>
+                <input type="checkbox" name="Agree" id="" class="mt-5" required> I am Register
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-success mt-3" id="">Register</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    $('document').ready(function(){
+      $('#LMSRegister').submit(function(event){
+                 event.preventDefault()
+            $.ajax({
+              url:'/LMS/LMSStudentRegister',
+              type:'post',
+              data:$('#LMSRegister').serialize(),
+              success:function(Result){
+                alert(Result)
+              },
+              error:function(){
+                alert('Server Error')
+              }
+            })
+      }) 
+
+      $('#LoginStudent').submit(function(event){
+                 event.preventDefault()
+            $.ajax({
+              url:'/LMS/LMSStudentLogin',
+              type:'post',
+              data:$('#LoginStudent').serialize(),
+              success:function(Result){
+                const value = Result.match(/@/);
+                  if(value){
+                    alert('Successfully Login')
+                    window.location='/LMS/LMSStudentDashboard?CollegeID='+Result;
+                   } else { $('#Error').text(Result)}
+              },
+              error:function(){
+                alert('Server Error')
+              }
+            })
+      }) 
+      $('#LMSLoginEmailVarify').submit(function(event){
+                 event.preventDefault()
+            $.ajax({
+              url:'/LMS/LMSLoginEmailVarify',
+              type:'post',
+              data:$('#LMSLoginEmailVarify').serialize(),
+              success:function(Result){
+                alert(Result)
+              },
+              error:function(){
+                alert('Server Error')
+              }
+            })
+      }) 
+    })
+    function LibraryAdminLogin(){
+       $('#LoginStudentDiv').hide()
+       $('#LoginAdminDiv').removeAttr('hidden')
+      }
+      function LibraryStudentLogin(){
+         location.reload()
+      }    
+      $('#LoginAdmin').submit(function(event){
+                 event.preventDefault()
+            $.ajax({
+              url:'/LMS/LMSAdminLogin',
+              type:'post',
+              data:$('#LoginAdmin').serialize(),
+              success:function(Result){
+                const value = Result.match(/@/);
+                  if(value){
+                    alert('Successfully Login')
+                    window.location='/LMS/LMSAdminDashboard?Email='+Result;
+                   } else { $('#Error').text(Result)}
+              },
+              error:function(){
+                alert('Server Error')
+              }
+            })
+      }) 
+  </script>
+   

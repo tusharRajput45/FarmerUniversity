@@ -1,0 +1,27 @@
+<div class="w-100">
+    <div class="" id="Content2"> 
+         <div class="Box  w-100 h-100">
+               <div class="Link-Box" id="LMSStudentRegister">
+                   <h3 class="mt-4">Library Register</h3>
+               </div>
+               <div class="Link-Box" id="allBookRequest">
+                  <h3 class="mt-4">All Book Request</h3>
+              </div>
+              <div class="Link-Box pt-4" id="ShowAllExam">
+                  <h3>Show All Exam</h3>
+              </div>
+              <div class="Link-Box">
+                  <h3>Add Examination Q&A Show</h3>
+              </div>
+         </div>
+    </div>
+  </div>
+
+  <script>
+    $('#LMSStudentRegister').click(function(){
+        $('#Content2').load('/admin/adminLMSStudentRegister') 
+     })
+     $('#allBookRequest').click(function(){
+        $('#Content2').load('/admin/adminLMSStudentAllBookRequest') 
+     })
+  </script>

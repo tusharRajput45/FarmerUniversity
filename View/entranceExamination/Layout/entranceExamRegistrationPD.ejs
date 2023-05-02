@@ -1,0 +1,117 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
+<style>
+    /* body{
+        background-color: 2;
+    } */
+    label{
+        margin-top: 5%;
+    }
+    .input{
+          width: 60%;
+          height: 40px;
+          border-radius: 5px;
+          border: white;
+          padding-left: 20px;
+          margin-top: 5%;
+          float: right;
+          background-color: bisque;
+      }
+</style>
+<script type="text/javascript">
+    $(document).ready(function(){
+    var i = 1;
+    $('#add').click(function(){
+    alert('Successfully Add Row');
+    i++;
+    $('#dynamicadd').append('<tr id="remove">'+
+                 '<td><input type="text" name="ClassORCourse[]" id="" class="form-control" placeholder="Class/Course" required></td>'+
+                 '<td><input type="text" name="RollNO[]" id="" class="form-control"placeholder="Roll No" required></td>'+
+                 '<td><input type="text" name="MarksObtained[]" id="MarksObtained" class="form-control MarksObtained"required placeholder="Marks Obtained" onchange="calc(this)"></td>'+
+                 '<td><input type="text" name="MaxMarks[]" id="MaxMarks" class="form-control MaxMarks"required placeholder="Maximum Marks" onchange="calc(this)"></td>'+
+                 '<td><input type="text" name="Parcentage[]" id="Parcentage" class="form-control Parcentage" required placeholder="Parcentage" readonly></td>'+
+                 '<td><input type="text" name="BoardORUniversity[]" id="" class="form-control" required placeholder="Board/University"></td>'+
+                 '<td><button type="button" id="" class="btn btn-danger remove_row">-</button></td>'+
+            '</tr>');
+    });
+    $(document).on('click','.remove_row',function(){
+    alert('Successfully Delete Row');
+    var row_id = $(this).attr("id");
+    $('#remove').remove();
+    });
+    });
+function calc(v){
+    var index=$(v).parent().parent().index();
+       console.log(index +"Tushar");
+    const MarksObtained=document.getElementsByClassName('MarksObtained')[index].value;
+    const MaxMarks=document.getElementsByClassName('MaxMarks')[index].value;
+        const findNo=MarksObtained*100/MaxMarks;
+        if(findNo>=60){
+        const Parcentage=document.getElementsByClassName('Parcentage')[index].value=findNo.toFixed(2);
+        }else{
+        const Parcentage=document.getElementsByClassName('Parcentage')[index].value='';
+            alert('Your Parcentage is less than 60')
+        }
+}
+    </script>
+
+<script>
+    $(document).ready(function(){
+        const Form=$('#SubmitForm');
+        $('#SubmitForm').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                url:Form.attr('action'),
+                type:'post',
+                data:$('#SubmitForm').serialize(),
+                success:function(result){
+                    alert('Successfully Submit Your Application Form')
+                },
+                error:function(){ 
+                    alert('server Error') 
+                }
+            })
+        })
+    })
+    $(document).ready( function () {
+        var HighSchoolYear = document.getElementById("HighSchoolYear");
+        var InterMediateYear = document.getElementById("InterMediateYear");
+        var GurationYear = document.getElementById("GurationYear");
+ 
+        var currentYear = (new Date()).getFullYear();
+        for (var i = 1950; i <= currentYear; i++) {
+            var option = document.createElement("OPTION");
+            option.innerHTML = i;
+            option.value = i;
+            HighSchoolYear.appendChild(option);
+
+            var option2 = document.createElement("OPTION");
+            option2.innerHTML = i;
+            option2.value = i;
+            InterMediateYear.appendChild(option2);
+
+            var option2 = document.createElement("OPTION");
+            option2.innerHTML = i;
+            option2.value = i;
+            GurationYear.appendChild(option2);
+        }
+    });
+    $.ajax({
+        url:'http://universities.hipolabs.com/search',
+        data:{
+            country:'india',
+        },
+        success:function(result){
+        var GurationUniversityName = document.getElementById("GurationUniversityName");
+            result.forEach(function(item){
+                let option=document.createElement('OPTION')
+                option.innerHTML=item.name;
+                option.value=item.name;
+                GurationUniversityName.add(option);
+            })
+            GurationUniversityName.appendChild(select)
+        }
+    })
+</script>

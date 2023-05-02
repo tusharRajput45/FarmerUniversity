@@ -1,0 +1,142 @@
+<title>Admission Dashboard</title>
+<%- include('../Layout/bootstrap')%>
+<div id="Main-Content">
+    <form action="">
+        <div class="steps-wrapper">
+            <div class="step" id="FirstForm" style="height: 87%;">
+                <div class="container">
+                    <div class="row">
+                        <h3 class="text-danger mt-3">Permanent Address Details</h3>
+                        <div class="col">
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="Village" id="" class="form-control" placeholder="Village" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="Sub-District" id="" class="form-control" placeholder="Sub District" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="Post" id="" class="form-control" placeholder="Post" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="District" id="" class="form-control" placeholder="District" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="PoliceStation" id="" class="form-control" placeholder="Police Station" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="PinCode" id="" class="form-control" placeholder="Pin Code" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-5">
+                         <button class="btn btn-danger float-end me-5 Next" type="button">Next</button>
+                </div>
+            </div>
+            <div class="step" id="SecondForm" style="height: 87%;">
+                <div class="container">
+                    <div class="row">
+                        <h3 class="text-danger mt-3">Permanent Address Details</h3>
+                        <div class="col">
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="Country" id="" class="form-control" placeholder="Country" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="State" id="" class="form-control" placeholder="State" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                            <div class="mt-4 w-100"> 
+                              <input type="text" name="" id="" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-5">
+                        <button class="btn btn-warning Prev" type="button">Previous</button>
+                        <button class="btn btn-success me-5 float-end" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+   <%- include('../layout/Footer')%>
+
+</div>
+<style>
+    .steps-wrapper{
+       display:flex;
+       overflow-x: hidden;
+    }
+    .step{
+        min-height:50%;
+        min-width: 100%;
+        top: 0;
+    }
+    </style>
+<script>
+    $(".Next").click(function(){
+       var scrollWidth=$('.step').width();
+       var wrapperPos=$(".steps-wrapper").scrollLeft();
+       console.log("Scroll Width"+scrollWidth+"scroll pos"+wrapperPos);
+       $(".steps-wrapper").animate({
+               scrollLeft:wrapperPos+scrollWidth
+       },50)
+   })
+   $(".Prev").click(function(){
+       var scrollWidth=$('.step').width();
+       var wrapperPos=$(".steps-wrapper").scrollLeft();
+       console.log("Scroll Width"+scrollWidth+"scroll pos"+wrapperPos);
+       $(".steps-wrapper").animate({
+               scrollLeft:wrapperPos-scrollWidth
+       },50)
+   })
+</script>

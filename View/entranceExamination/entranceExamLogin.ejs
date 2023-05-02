@@ -1,0 +1,40 @@
+<%- include('../Layout/logo') %>
+<%- include('../Layout/bootstrap') %>
+<title>Entrance Exam Login</title>
+
+<hr class="mt-5">
+<div class="container">
+    <form autocomplete="off" class="form-group" id="ExamKeyLogin">
+        <div class="container">
+        <div class="col-sm-6 mt-5">
+            <input type="Email" name="Email" id="EmailLogin" class="form-control" placeholder="Email" required>
+        </div>
+        <div class="col-sm-6 mt-5">
+            <input type="password" name="ExamKey" id="" class="form-control" placeholder="Exam Key" required>
+        </div>
+        <div class="col-sm-6 mt-5">
+            <input type="password" name="Password" id="PasswordLogin" class="form-control" minlength="5" placeholder="Password"  minlength="5" required>
+        </div>
+        <input type="checkbox" name="" class="ml-3 mt-5" id="requiredLogin" required >&nbsp; &nbsp; I am Register
+        <div class="mt-5">
+            <input type="submit" value="Exam Login" id="Login" class="btn btn-warning ml-3">
+        </div></div>
+    </form>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#ExamKeyLogin').submit(function(event){
+    $.ajax({
+    url:'/entranceExamination/entranceExamLogin',
+    type:'post',
+    data:$('#ExamKeyLogin').serialize(),
+    success:function(result){
+        window.location='/entranceExamination/entranceExam'
+    },
+    error:function(err){alert('Server Error')}
+})
+event.preventDefault();
+  })
+
+    })
+</script>

@@ -1,0 +1,206 @@
+<title>LMS Dashboard</title>
+<%- include('../Layout/Logo') %>
+<%- include('../Layout/bootstrap') %>
+<hr class="mt-5">
+<div id="Content">
+    <div class="bg-dark p-3 pb-5">
+        <div><button class="btn btn-warning ml-5 float-start" id="AllBook">All Book</button></div>
+        <div><button class="btn btn-warning ml-3 float-start" id="ComfrimRequest">Comfrim Book Request</button></div>
+        <div><button class="btn btn-warning ml-3 float-start" id="IssuedBook">Issued Book</button></div>
+        <div><button class="btn btn-warning ml-3 float-start" id="RegisterStudent">Register Student</button></div>
+        <div><button class="btn btn-warning ml-3 float-start" id="RejectRequest">Reject Request</button></div>
+        <div><button  class="btn btn-danger ml-3 float-end  me-3" id="Logout" onclick="Logout()">Logout</button>
+        <p class="text-white float-end mt-2 me-4"> Welcome  &nbsp;Tushar Rajput</p>
+    </div>
+</div>
+<div id="Request" class="">
+    <table class="table  mt-4">
+        <tr class="bg-success text-light">
+            <th>Request NO</th>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>College ID</th>
+            <th>Request Date</th>
+            <th colspan="">Action</th>
+            <th colspan="7"><input type="search" name="" id="" class="form-control" placeholder="Search"></th>
+        </tr>
+       <% Result.forEach(function(Result,index) { %>
+        <% if(Result.Status==='Pending'){%>
+        <tr class="bg-light">
+            <th><%= Result.RequestNO %></th>
+            <th><%= Result.Name %></th>
+            <th><%= Result.Email %></th>
+            <th><%= Result.CollegeID %></th>
+            <th><%= Result.RequestDate %></th>
+            <th><button class="btn btn-success" onclick="ViewDetails('<%= Result._id %>')" data-toggle="modal" data-target="#ViewDetailsModel">View Details</button></th>
+            <th><button class="btn btn-danger"  onclick="RequestCancel('<%= Result._id %>')"data-toggle="modal" data-target="#CancelRequestModel">Request Cancel</button></th>
+            <th><button class="btn btn-Warning me-4 mt-1" onclick="RequestDelete('<%= Result._id %>')"><i class="fa fa-trash" ></i></button></th>
+        </tr>
+       <%}%>
+       <%});%>
+    </table>
+</div>
+<div class="modal" id="ViewDetailsModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Request Details</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table">
+                <tr>
+                    <th>Request NO</th>
+                    <th id="RequestNO"></th>
+                 </tr>
+                 <tr>
+                    <th>Name</th>
+                    <th id="Name"></th>
+                 </tr>
+                 <tr>
+                  <th>College ID</th>
+                  <th id="CollegeID"></th>
+               </tr>
+                 <tr>
+                    <th>Book Name</th>
+                    <th id="BookName"></th>
+                 </tr> 
+                 <tr>
+                    <th>Book Auhtor Name</th>
+                    <th id="BookAuthorName"></th>
+                 </tr>
+                  <tr>
+                    <th>Submit Date</th>
+                    <th id="SubmitDate"></th>
+                 </tr>
+            </table>
+            <form action="" id="RequestBookNO" autocomplete="off">
+              <input type="text" name="_id" class="form-control" id="BookRequestID" hidden>
+              <input type="text" name="BookIssueBookNO" id="BookIssueBookNO" class="form-control" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Book No" required>
+            <button type="button" class="btn btn-danger mt-5 float-end me-3" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success mt-5 float-end me-3">Comfirm Request</button>
+          </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="CancelRequestModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"> Request Cancel</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="CancelRequest" autocomplete="off">
+                <input type="text" name="_id" id="ID" class="form-control" hidden>
+                <input type="text" name="CancelReason" class="form-control" placeholder="Reason" required>
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3" id="">Reject Request</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+  <script>
+    function ViewDetails(_id){
+      $.ajax({
+        url:'/LMS/LMSAdminViewDetails',
+        type:'post',
+        data:{'_id':_id},
+        success:function(Result){
+          $('#RequestNO').text(Result.RequestNO)
+          $('#Name').text(Result.Name)
+          $('#CollegeID').text(Result.CollegeID)
+          $('#BookName').text(Result.BookName)
+          $('#BookAuthorName').text(Result.BookAuthorName)
+          $('#SubmitDate').text(Result.SubmitDate)
+          $('#BookRequestID').val(Result._id)
+          $('#BookIssueBookNO').val(Result.BookIssueBookNO)
+        },
+        error:function(){alert('Server Error')}
+      })
+    }
+    $('document').ready(function(){
+       $('#RequestBookNO').submit(function(event){
+        event.preventDefault()
+          $.ajax({
+            url:'/LMS/LMSStudentRequestBookNO',
+            type:'post',
+            data:$('#RequestBookNO').serialize(),
+            success:function(Result){
+              alert(Result)
+              location.reload()
+            },
+            error:function(){alert('Server Error')}
+          })
+       })
+       $('#ComfrimRequest').click(function(){
+           
+       })
+    })
+    function RequestDelete(_id){
+       $.ajax({
+        url:'/LMS/LMSAdminStudentRequestDelete',
+        type:'post',
+        data:{'_id':_id},
+        success:function(Result){
+          alert(Result)
+          location.reload()
+        },
+        error:function(err){alert('Server Error')},
+       })
+    }
+    $('#AllBook').click(function(){
+         window.location='/LMS/LMSAllBook'
+    })
+    $('#ComfrimRequest').click(function(){
+         window.location='/LMS/LMSAdminComfirmRequest'
+    })
+    $('#IssuedBook').click(function(){
+      window.location='/LMS/IssueBook'
+    })
+    $('#RegisterStudent').click(function(){
+      window.location='/LMS/LMSRegisterStudent'
+    })
+    $('#RejectRequest').click(function(){
+      window.location='/LMS/LMSRejectRequest'
+    })
+      function RequestCancel(_id){
+         $('#ID').val(_id)
+      }
+      $('#CancelRequest').submit(function(event){
+          event.preventDefault()
+          $.ajax({
+            url:'/LMS/LMSAdminReasonRequest',
+            type:'post',
+            data:$('#CancelRequest').serialize(),
+            success:function(Result){
+                 alert(Result)
+                 location.reload()
+            },
+            error:function(err){alert('Server Error')},
+          })
+      })
+      function Logout(){
+        $.ajax({
+            url:'/LMS/LMSAdminDashboardLogout',
+            type:'get',
+            success:function(Result){
+                 alert(Result)
+                 location.reload()
+            },
+            error:function(){alert('Server Error')},
+          })
+      }
+  </script>

@@ -1,0 +1,12 @@
+QuestionNO,Question,Answer1,Answer2,Answer3,Answer4,TrueAnswer
+1,Who is the father of computer ?,"['James Gosling','James Gosling']",Charles Babbage,Dennis Ritchie,"['James Gosling','James Gosling']",1
+2,What is the full form of cpu ?,Computer processingUnit,Computer Principle unit,center processing unit,Control processing Unit,3
+3,Which of the following language does the computer understand ?,computer understandes only c language,computer understandes only Assembly language,computer understandes only Binary language,computer understandes only BASIC language,3
+4,which of the following computer language is written in binary codes only ?,pascal,machine language,c,c#,2
+5,which of the following is the brain of the computer ?,Center processing unit,memory,aritmetic and logic unit,Control Unit,1
+6,which of the following is not a characteristic of a computer,0,accuracy,diligence,I.Q,4
+7,which of the following is the smallest unit of the data in computer ,bit,kb,nibble,byte,1
+8,which of the following is not a type of computer code,EDIC,ASCII,BCD,EBCDIC,1
+9,which of the following is designed to control the operations of a computer,user,application software,system software,utility software,3
+10,which of the following is used in EBCDIC ,super computers,mainframes ,machine codes,programming,2
+11,which of te following device use positional notation to represent a decimal ,pascaline,abacus,computer ,calculator,2

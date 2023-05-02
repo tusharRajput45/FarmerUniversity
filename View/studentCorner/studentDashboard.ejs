@@ -1,0 +1,433 @@
+<%- include('../Layout/logo')%>
+<%- include('../Layout/bootstrap')%>
+<head>
+  <title>Student Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+</head>
+<hr class="mt-5">
+<body>
+    <div class="row w-100">
+        <div class=" bg-dark pt-5 ml-3 text-center" style="height:60%;width: 20%;">
+             <button class="btn btn-danger w-100"data-toggle="modal" data-target="#StudentProfileModel">Student Profile</button><br><br>
+             <button class="btn btn-danger w-100"data-toggle="modal" data-target="#StudentIssuedBookModel">Library Issued Book</button><br><br>
+             <button class="btn btn-danger w-100"data-toggle="modal" data-target="#EntranceExamResultModel">Entrance Result</button><br><br>
+             <button class="btn btn-danger w-100">Result</button><br><br>
+             <button class="btn btn-danger w-100"data-toggle="modal" data-target="#PaymentModel">All Payment Details</button><br><br>
+             <button class="btn btn-warning w-100" onclick="LogoutProfile()">Logout Profile &nbsp;  <i class="fa fa-sign-out" aria-hidden="true"></i> </button><br><br>
+        </div>
+        <div class="col">
+            <div class="">
+                <table class="table border bg-light">
+                     <tr>
+                        <th>Name</th>
+                        <td><%= Result.Name%></td>
+                        <th>Father's Name</th>
+                        <td><%= Result3.FatherName %></td>
+                     </tr>
+                     <tr>
+                        <th>Mother's Name</th>
+                        <td><%= Result3.MotherName %> </td>
+                        <th>Aadhad Card NO</th>
+                        <td><%= Result3.AadharNO %></td>
+                     </tr>
+                     <tr>
+                        <th>Mobile</th>
+                        <td><%= Result.Mobile%></td>
+                        <th>Email</th>
+                        <td><%= Result.Email%></td>
+                     </tr>
+                     <tr>
+                        <th>Date of Birth</th>
+                        <td><%= Result3.DOB %></td>
+                        <th>Class</th>
+                        <td>BCA</td>
+                     </tr>
+                     <tr>
+                        <th>City</th>
+                        <td><%= Result3.City %> </td>
+                        <th>State</th>
+                        <td><%= Result3.State %></td>
+                     </tr>
+                     <tr>
+                        <th>Country</th>
+                        <td><%= Result3.Country %></td>
+                     </tr>
+                </table>
+                <div class="bg-dark p-3 text-light" style="height: 28.5%;">
+                    <p class="">High School Passed From U.P Board Allahabad in 2018 with First Div</p>
+                    <p class="">Intermediate Passed From U.P Board Allahabad in 2020 with First Div</p>
+                    <p class="">BCA Passed From U.P Board Allahabad in 2023 with First Div</p>
+                </div>
+            </div>
+        </div>
+        <div class="text text-center bg-primary pt-5" style=" width: 20%;height: 60%;">
+            <button class="btn btn-warning w-100"data-toggle="modal" data-target="#FeesStuctureModel">Fees Structure</button><br><br>
+            <button class="btn btn-warning w-100"data-toggle="modal" data-target="#NoticeModel" onclick="DownloadNotice()">Notice</button><br><br>
+            <button class="btn btn-warning w-100">Hostel</button><br><br>
+            <button class="btn btn-warning w-100">Chats With College</button><br><br>
+            <button class="btn btn-warning w-100" data-toggle="modal" data-target="#ChangeProfileModel">Change Profile</button><br><br>
+            <button class="btn btn-warning w-100" data-toggle="modal" data-target="#ForgetPasswordModel">Forget Password</button><br><br>
+        </div>
+    </div>
+</body>
+<div class="modal" id="StudentProfileModel">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Student Profile</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div id="Profile">
+                <img src="/entranceExamUploadPhoto/<%= Result2.Photo %>" alt="profile" width="100%">
+            </div>
+            <div class="modal-footer mt-3">
+                <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+            </div>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+</div>
+<div class="modal" id="ForgetPasswordModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Forget Password</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form class="form-group" id="LMSLoginPasswordForget" autocomplete="off">
+                <input type="text" name="Email" id="Email" value="<%= Result.Email %>" class="form-control mt-3" hidden required>
+                <input type="text" name="Password" id="Password" class="form-control mt-3" placeholder="New Password" minlength="10" maxlength="10" required>
+                <input type="checkbox" name="Agree" id="" class="mt-4" required> I am Register
+                <div class="modal-footer mt-3">
+                  <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+</div>
+<div class="modal" id="StudentIssuedBookModel">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Issued Books</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table">
+                 <tr class="bg-dark text-light">
+                    <th>Request No</th>
+                    <th>Book Name</th>
+                    <th>Book Author Name</th>
+                    <th>Book Issued Date</th>
+                    <th>Book Submit Date</th>
+                 </tr>
+                 <%for (let i = 0; i < Book.length; i++) {%>                   
+                 <% if (Book[i].BookIssueOTPSend===1) {%>
+                 <tr>
+                    <td><%=Book[i].RequestNO%></td>
+                    <td><%=Book[i].BookName%></td>
+                    <td><%=Book[i].BookAuthorName%></td>
+                    <td><%=Book[i].RequestDate%></td>
+                    <td><%=Book[i].SubmitDate%></td>
+                 </tr>
+                 <%}%>
+                 <%}%>
+            </table>
+                <div class="modal-footer mt-3">
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+</div>
+<div class="modal" id="PaymentModel">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Payment Details</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table">
+                 <tr class="bg-dark text-light">
+                    <th>Payment Reference No</th>
+                    <th>Payment Status</th>
+                    <th>Payment Date</th>
+                    <th>Payment Time</th>
+                    <th>Payment Mode</th>
+                 </tr>
+                 <%for (let i = 0; i < Payment.length; i++) {%>                   
+                 <% if (Payment[i].PaymentStatus==='Success') {%>
+                 <tr>
+                    <td><%=Payment[i].PaymentReferenceNO%></td>
+                    <td><%=Payment[i].PaymentStatus%></td>
+                    <td><%=Payment[i].PaymentDate%></td>
+                    <td><%=Payment[i].PaymentTime%></td>
+                    <td>Online</td>
+                 </tr>
+                 <%}%>
+                 <%}%>
+            </table>
+                <div class="modal-footer mt-3">
+                  <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+</div>
+<div class="modal" id="EntranceExamResultModel">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content"> 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Entrance Exam Result</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <div id="ContentModel">
+                <table class="table">
+                  <tr class="bg-dark text-light">
+                    <th>Exam Name</th>
+                    <th>Exam Code</th>
+                    <th>Exam Date</th>
+                    <th>Totel Question</th>
+                    <th>Attemp Question</th>
+                    <th>Wrong Question</th>
+                    <th>Total</th>
+                  </tr>
+                  <tr>
+                    <td>MCATEST</td>
+                    <td>165478</td>
+                    <td>20/04/2023</td>
+                    <td>100</td>
+                    <td>78</td>
+                    <td>15</td>
+                    <td>63</td>
+                  </tr>
+                </table>
+          </div>
+              <div class="modal-footer mt-3">
+                <button class="btn btn-success mt-3" onclick="DownloadEntranceResult('tusharrajput919@gmail.com')">Download </button>
+                <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+              </div>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<div class="modal" id="FeesStuctureModel">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content"> 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Fees Structure</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <div id="ContentModel">
+            <h5 class="float-end">Total Fee - 30000.00 Rs</h5>
+                <table class="table">
+                  <tr class="bg-dark text-light">
+                    <th>S.NO</th>
+                    <th>Fees Amount</th>
+                    <th>Fees Type</th>
+                    <th>Fees Submit Date</th>
+                    <th>Fees Submit Time</th>
+                    <th>Accountant Name</th>
+                    <th>Dua Fees</th>
+                    <th>Download Reciept</th>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>15000.00 Rs</td>
+                    <td>Tutorial Fee</td>
+                    <td>20/04/2023</td>
+                    <td>10.30 AM</td>
+                    <td>Mohit Kumar</td>
+                    <td>15000.00 Rs</td>
+                    <td><button class="btn btn-danger ml-3" onclick="DownloadReciept()"><i class="fa fa-download" aria-hidden="true"></i></button></td>
+                  </tr>
+                </table>
+          </div>
+              <div class="modal-footer mt-3">
+                <button class="btn btn-primary mt-3" data-toggle="modal" data-target="#FeesPayModel" data-dismiss="modal">Pay Fees</button>
+                <button type="button" class="btn btn-warning mt-3" data-dismiss="modal">Close</button>
+              </div>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="FeesPayModel">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Fees Pay</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5 class="float-end">Duo Fee - 15000.00 Rs</h5>
+        <form action="" class="mt-5">
+          <select name="FeesType" id="" class="form-control" required>
+            <option value="">Select Fees type</option>
+            <option value="Tutorial Fee">Tutorial Fee</option>
+            <option value="Partical Fee">Partical Fee</option>
+            <option value="Dress Fee">Dress Fee</option>
+            <option value="Other Fee">Other Fee</option>
+          </select>
+          <input type="text" name="Fees" id="" class="form-control mt-3" placeholder="Enter Fees" required>
+          <div class="modal-footer mt-3">
+            <button class="btn btn-success" onclick="PayFee()">Pay Fees</button>
+            <button class="btn btn-danger" data-target="#FeesStuctureModel" data-toggle="modal" data-dismiss="modal">Back</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="NoticeModel">
+  <div class="modal-dialog  modal-xl modal-dialog-scrollable">
+    <div class="modal-content"> 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Notice</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body" id="">
+        <div class="" id="NoticeBody">
+              <center><img src="/EntranceExamDateSheet.png" alt=""></center>
+        </div>    
+        <div id="editor"></div>
+              <div class="modal-footer mt-5">
+                <button type="button" class="btn btn-danger mt-5" id="Download" >Download Notice</button>
+                <button type="button" class="btn btn-warning mt-5" data-dismiss="modal">Close</button>
+              </div>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="ChangeProfileModel">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change student Profile</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" id="ChangeProfile">
+          <input type="email" name="Email" id="" class="form-control" value="<%= Result.Email%>" required>
+          <input type="file" name="file" id="" class="form-control mt-3" required>
+          <div class="modal-footer mt-3">
+            <button class="btn btn-success" type="submit">Upload Profile</button>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $('document').ready(function(){
+        $('#LMSLoginPasswordForget').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                    url:'/Student/StudentForgetPassword',
+                    type:'post',
+                    data:$('#LMSLoginPasswordForget').serialize(),
+                    success:function(Result){alert(Result)},
+                    error:function(error){alert('Server Error')}
+                })
+            })
+        })
+        function IssuedBook(Email){
+            $.ajax({
+                    url:'/Student/StudentIssuedBook',
+                    type:'post',
+                    data:{'Email':Email},
+                    success:function(Result){
+                    },
+                    error:function(error){alert('Server Error')}
+                })
+        }
+        function DownloadEntranceResult(Email){
+          $.ajax({
+                    url:'/Student/downloadEntranceExamResult',
+                    type:'post',
+                    data:{'Email':Email},
+                    success:function(Result){alert(Result)},
+                    error:function(error){alert('Server Error')}
+                })
+        }
+        function LogoutProfile(){
+          $.ajax({
+                    url:'/Student/StudentLogout',
+                    type:'get',
+                    success:function(Result){
+                       alert(Result)
+                       location.reload()
+                    },
+                    error:function(error){alert('Server Error')}
+                })
+        }
+        function DownloadReciept(){alert('Successfully Download Reciept ')}
+        function PayFee(){alert('Successfully Pay Fees')}
+        
+        $('#ChangeProfile').submit(function(event){
+          event.preventDefault();
+          const formData=new FormData(this)
+          $.ajax({
+            url:'/student/studentchangeProfile',
+            type:'post',
+            data:formData,
+            contentType:false,
+            processData:false,
+            success:function(data){
+              alert('Successfully Upload')
+              location.reload();
+            },
+            error:function(){alert('Server Error')}
+         })
+        })
+
+    window.onload = function () {
+    document.getElementById("Download")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("NoticeBody");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'myfile.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'Landscape' }
+            };
+            const value=html2pdf().from(invoice).set(opt).save();
+            if (value) {alert('Successfully Download Exam Notice')}
+        })
+}
+</script>

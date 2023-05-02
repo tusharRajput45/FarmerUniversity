@@ -1,0 +1,160 @@
+<title>LMS Dashboard</title>
+<%- include('../Layout/bootstrap') %>
+<h2 class="text-center text-danger mt-5"><u> All LMS Varified Book </u></h2>
+<div class="float-end mt-3 me-5">
+    <button class="btn btn-danger me-3"data-toggle="modal" data-target="#AddBookFileModel">Add Book File</button>
+    <button class="btn btn-warning"data-toggle="modal" data-target="#AddBookModel">Add Book</button>
+</div>
+    <table class="table  mt-5 text-center">
+      <tr class="bg-dark text-light">
+        <th>S.No</th>
+        <th>Book Name</th>
+        <th>Book Author Name</th>
+        <th>Book NO</th>
+        <th>Library Row NO</th>
+        <th colspan="7">Varified</th>
+        <th colspan="7">Action</th>
+      </tr>
+      <%for(var x=0;x < Result.length;x++){%>
+        <tr class="bg-light ">
+          <th><%= x+1 %></th>
+          <th><%= Result[x].BookName %></th>
+          <th><%= Result[x].BookAuthorName %></th>
+          <th><%= Result[x].BookNO %></th>
+          <th><%= Result[x].LibraryRowNO %></th>
+          <th><%= Result[x].Varified %></th>
+          <th colspan="7"><button class="btn btn-warning" data-toggle="modal" data-target="#EditBookModel" onclick="EditBook('<%= Result[x]._id %>')"><i class="fa fa-edit" ></i></button></th>
+          <th><button class="btn btn-danger"onclick="DeleteBook('<%= Result[x]._id %>')"><i class="fa fa-trash" ></i></button></th>
+        </tr>
+        <%}%>
+    </table>
+
+<div class="modal" id="AddBookFileModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add Book File</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="" id="AddBookFile">
+                <input type="file" name="Book" id="" class="form-control" required>
+                <div class="modal-footer mt-4">
+                    <button class="btn btn-warning float-end mt-2 me-3" >Submit</button>
+                    <button type="button" class="btn btn-danger mt-2 float-end" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div> 
+      </div>
+    </div>
+</div>
+<div class="modal" id="AddBookModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add Book</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="" id="AddBook">
+                <input type="text" name="BookName" id="" class="form-control" placeholder="Book Name" required>
+                <input type="text" name="BookAuthorName" id="" class="form-control mt-3" placeholder="Book Author Name" required>
+                <input type="text" name="BookNO" minlength="6" maxlength="6" id="" class="form-control mt-3" placeholder="Book No" required>
+                <input type="text" name="LibraryRowNO" minlength="7" maxlength="7" id="" class="form-control mt-3" placeholder="Library Row NO" required>
+                <div class="modal-footer mt-4">
+                    <button class="btn btn-warning float-end mt-2 me-3" >Submit</button>
+                    <button type="button" class="btn btn-danger mt-2 float-end" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div> 
+      </div>
+    </div>
+</div>
+<div class="modal" id="EditBookModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add Book</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="" id="EditBook">
+                <input type="text" name="_id" id="ID" class="form-control" required hidden>
+                <input type="text" name="BookName" id="BookName" class="form-control" placeholder="Book Name" required>
+                <input type="text" name="BookAuthorName" id="BookAuthorName" class="form-control mt-3" placeholder="Book Author Name" required>
+                <input type="text" name="BookNO" minlength="6" maxlength="6" id="BookNO" class="form-control mt-3" placeholder="Book No" required>
+                <input type="text" name="LibraryRowNO" minlength="7" maxlength="7" id="LibraryRowNO" class="form-control mt-3" placeholder="Library Row NO" required>
+                <input type="text" name="Varified" minlength="1" maxlength="1" id="Varified" class="form-control mt-3" placeholder="Library Row NO" required>
+                <div class="modal-footer mt-4">
+                    <button class="btn btn-warning float-end mt-2 me-3" >Submit</button>
+                    <button type="button" class="btn btn-danger mt-2 float-end" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div> 
+      </div>
+    </div>
+</div>
+<script>
+    $('document').ready(function(){
+        $('#AddBook').submit(function(event){
+            event.preventDefault()
+            $.ajax({
+                url:'/LMS/LMSAddBook',
+                type:'post',
+                data:$('#AddBook').serialize(),
+                success:function(Result){
+                    alert(Result)
+                    location.reload()
+                },
+                error:function(){alert('Server Error')}
+            })
+        })
+        $('#EditBook').submit(function(event){
+            event.preventDefault()
+            $.ajax({
+                url:'/LMS/LMSEditBook',
+                type:'post',
+                data:$('#EditBook').serialize(),
+                success:function(Result){
+                    alert(Result)
+                    location.reload()
+                },
+                error:function(){alert('Server Error')}
+            })
+        })
+    })
+    function EditBook(_id){
+       $('#ID').val(_id)
+       $.ajax({
+                url:'/LMS/LMSGetBook',
+                type:'post',
+                data:{'_id':_id},
+                success:function(Result){
+                    $('#BookName').val(Result.BookName)
+                    $('#BookAuthorName').val(Result.BookAuthorName)
+                    $('#BookNO').val(Result.BookNO)
+                    $('#LibraryRowNO').val(Result.LibraryRowNO)
+                    $('#Varified').val(Result.Varified)
+                },
+                error:function(){alert('Server Error')}
+            })
+    }
+    function DeleteBook(_id){
+         $.ajax({
+                url:'/LMS/LMSDeleteBook',
+                type:'post',
+                data:{'_id':_id},
+                success:function(Result){
+                    alert(Result)
+                    location.reload()
+                },
+                error:function(){alert('Server Error')}
+            })
+    }
+</script>

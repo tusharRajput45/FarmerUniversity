@@ -1,0 +1,155 @@
+<%- include('../Layout/bootstrap') %>
+<title>LMS Dashboard</title>
+<center><u><h2 class="mt-5">Comfirm Request Book</h2></u></center>
+
+<table class="table  mt-4">
+    <tr class="bg-dark text-light">
+        <th>Request NO</th>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>College ID</th>
+        <th>Request Date</th>
+        <th colspan="">Action</th>
+        <th colspan="7"><input type="search" name="" id="" class="form-control" placeholder="Search"></th>
+    </tr>
+   <% Result.forEach(function(Result,index) { %>
+    <%if(Result.Status==='Comfirm'){%>
+    <tr class="bg-light">
+        <th><%= Result.RequestNO %></th>
+        <th><%= Result.Name %></th>
+        <th><%= Result.Email %></th>
+        <th><%= Result.CollegeID %></th>
+        <th><%= Result.RequestDate %></th>
+        <th><button class="btn btn-success" onclick="ViewDetails('<%= Result._id %>')" data-toggle="modal" data-target="#ViewDetailsModel">View Details</button></th>
+        <th><button class="btn btn-danger"  onclick="SendOTP('<%= Result._id %>')"data-toggle="modal" data-target="#OTPModel">Send OTP</button></th>
+        <th><button class="btn btn-Warning me-4 mt-1" onclick="RequestDelete('<%= Result._id %>')"><i class="fa fa-trash" ></i></button></th>
+    </tr>
+   <%}%>
+   <%});%>
+</table>
+<div class="modal" id="ViewDetailsModel">
+  <div class="modal-dialog">
+    <div class="modal-content"> 
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Request Details</h4>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+          <table class="table">
+              <tr>
+                  <th>Request NO</th>
+                  <th id="RequestNO"></th>
+               </tr>
+               <tr>
+                  <th>Name</th>
+                  <th id="Name"></th>
+               </tr>
+               <tr>
+                <th>College ID</th>
+                <th id="CollegeID"></th>
+             </tr>
+               <tr>
+                  <th>Book Name</th>
+                  <th id="BookName"></th>
+               </tr> 
+               <tr>
+                  <th>Book Auhtor Name</th>
+                  <th id="BookAuthorName"></th>
+               </tr>
+                <tr>
+                  <th>Submit Date</th>
+                  <th id="SubmitDate"></th>
+               </tr>
+               <tr>
+                  <th>Book Issue NO</th>
+                  <th id="BookIssueBookNO"></th>
+               </tr>
+          </table>
+              <button type="button" class="btn btn-danger mt-5 float-end me-3" data-dismiss="modal">Close</button>
+      </div> 
+      <!-- Modal footer -->
+    </div>
+  </div>
+</div>
+<div class="modal" id="OTPModel">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Request Details</h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form action="" id="OTPForm" autocomplete="off">
+              <input type="text" name="_id"  class="form-control" id="idModel" readonly hidden><br>
+              <input type="text" name="Email"  class="form-control" id="EmailModel" readonly><br>
+              <input type="text" name="OTP" id="" class="form-control" placeholder="OTP">
+            <button type="button" class="btn btn-danger mt-5 float-end me-3" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success mt-5 float-end me-3">Send OTP</button>
+          </form>
+        </div> 
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>
+<script>
+    function SendOTP(_id){
+        $.ajax({
+            url:'/LMS/LMSAdminComfirmRequestSendOTP',
+            type:'post',
+            data:{'_id':_id},
+            success:function(Result){
+                   $('#EmailModel').val(Result.Email)
+                   $('#idModel').val(Result._id)
+            },
+            error:function(Error){console.log('Server Error');}
+        })
+    }
+    $('#OTPForm').submit(function(event){
+      event.preventDefault()
+      $.ajax({
+            url:'/LMS/LMSIssueBookVarifyOTP',
+            type:'post',
+            data:$('#OTPForm').serialize(),
+            success:function(Result){
+              alert(Result)
+              location.reload()
+            },
+            error:function(Error){console.log('Server Error');}
+        })
+    })
+    function RequestDelete(_id){
+       $.ajax({
+        url:'/LMS/LMSAdminStudentRequestDelete',
+        type:'post',
+        data:{'_id':_id},
+        success:function(Result){
+          alert(Result)
+          location.reload()
+        },
+        error:function(err){alert('Server Error')},
+       })
+    }
+    function ViewDetails(_id){
+      $.ajax({
+        url:'/LMS/LMSAdminViewDetails',
+        type:'post',
+        data:{'_id':_id},
+        success:function(Result){
+          $('#RequestNO').text(Result.RequestNO)
+          $('#Name').text(Result.Name)
+          $('#CollegeID').text(Result.CollegeID)
+          $('#BookName').text(Result.BookName)
+          $('#BookAuthorName').text(Result.BookAuthorName)
+          $('#SubmitDate').text(Result.SubmitDate)
+          $('#BookIssueBookNO').text(Result.BookIssueBookNO)
+        },
+        error:function(){alert('Server Error')}
+      })
+    }
+</script>

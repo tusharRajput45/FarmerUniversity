@@ -1,0 +1,120 @@
+<title>Entrance Test Print</title>
+<%- include('../Layout/bootstrap') %>
+<div class="border container mt-3">
+    <center>
+        <h2 class="text-danger m-5">Tech Farmer University , Sarkara Chakrajmal</h2>
+        <h4 class="text-dark">Entrance Test Print 2022-23</h4>
+    </center>
+</div>
+<div class="container border mb-5">
+    <% if(Result){%>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><%= Result.Name %></td>
+                <th>Father's Name</th>
+                <td colspan="5"><%= Result.FatherName %></td>
+            </tr>
+            <tr>
+                <th>Mother's Name</th>
+                <td><%= Result.MotherName %></td>
+                <th>Gender</th>
+                <td  class="w-25"><%= Result.Gender %></td>
+                <td rowspan="4"> <img src="/entranceExamUploadPhoto/<%= Photo %>" alt="Photo" width="150px" height="150px"></td>
+            </tr><tr>
+                <th>Email</th>
+                <td><%= Result.Email %></td>
+                <th>Mobile</th>
+                <td><%= Result.Mobile %></td>
+            </tr><tr>
+                <th>Aadhar NO</th>
+                <td><%= Result.AadharNO %></td>
+                <th>DOB</th>
+                <td><%= Result.DOB %></td>
+            </tr><tr>
+                <th>Country</th>
+                <td><%= Result.Country %></td>
+                <th>State</th>
+                <td><%= Result.State %></td>
+            </tr><tr>
+                <th>City</th>
+                <td><%= Result.City%></td>
+                <th>Address</th>
+                <td colspan="5"><%= Result.Address %></td>
+            </tr>
+            <tr>
+                <th>High School Roll No</th>
+                <td><%= Result.HighSchoolRollNO %></td>
+                <th>High School Passed Year</th>
+                <td><%= Result.HighSchoolYear %></td>
+            </tr><tr>
+                <th>InterMediate Roll No</th>
+                <td><%= Result.InterMediateRollNO %></td>
+                <th>InterMediate Passed Year</th>
+                <td><%= Result.InterMediateYear %></td>
+            </tr>
+            <tr>
+                <th>Guration Course</th>
+                <td><%= Result.GurationCourse %></td>
+                <th>Guration Year</th>
+                <td><%= Result.GurationYear %></td>
+            </tr><tr>
+                <th>Guration Roll NO</th>
+                <td><%= Result.GurationRollNO %></td>
+                <th>Guration University Name</th>
+                <td colspan="5"><%= Result.GurationUniversityName %></td>
+            </tr>
+         </table>
+         <table class="mt-4">
+            <tr>
+                <th>Class/Course</th>
+                <th>Roll NO</th>
+                <th>Marks Obtained</th>
+                <th>Maximum Marks</th>
+                <th>Percentage</th>
+                <th>Board/University</th>
+            </tr>
+            <% for(var i=0 ;i<Result.ClassORCourse.length;i++){%>
+                    <tr>
+                        <td><%= Result.ClassORCourse[i] %></td>
+                        <td><%= Result.RollNO[i] %></td>
+                        <td><%= Result.MarksObtained[i] %></td>
+                        <td><%= Result.MaxMarks[i] %></td>
+                        <td><%= Result.Parcentage[i] %></td>
+                        <td><%= Result.BoardORUniversity[i] %></td>
+                    </tr>
+            <%}%>
+         </table>
+         <table class="mt-4 text-center">
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Payment Date</th>
+                        <th>Payment Status</th>
+                        <th>Payment Time</th>
+                        <th>Payment Amount</th>
+                    </tr>
+                    <% for(var i=0 ;i<Result2.length;i++){%>
+                        <tr>
+                            <td><%= Result2[i].PaymentReferenceNO %></td>
+                            <td><%= Result2[i].PaymentDate %></td>
+                            <td><%= Result2[i].PaymentStatus %></td>
+                            <td><%= Result2[i].PaymentTime %></td>
+                            <td><%= Result2[i].PaymentAmount %>.00</td>
+
+                        </tr>
+                <%}%>
+         </table>
+    <%}%>
+ 
+</div>
+<style>
+    table,tr,th,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td,th{
+        width: 20%;
+        padding: 8px;
+    }
+</style>

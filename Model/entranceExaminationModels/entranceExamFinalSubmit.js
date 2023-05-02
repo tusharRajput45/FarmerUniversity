@@ -1,0 +1,54 @@
+const { default: mongoose } = require("mongoose");
+
+const Schema=mongoose.Schema({
+    RegistrationNO:{
+        type:String,
+        required:true,
+        unique:true,
+    },
+    Name:{
+        type:String,
+        required:true,
+        uppercase:true,
+    },
+    FatherName:{
+        type:String,
+        required:true,
+        uppercase:true,
+       },
+    Email:{
+        type:String,
+        required:true,
+        unique:true,
+       },
+    FinalSubmitDate:{
+        type:String,
+        require:true,
+    },
+    FinalSubmitTime:{
+        type:String,
+        require:true,
+    },
+    Final_Submit:{
+        type:Number,
+        default:0,
+    },
+    Varified_admin:{
+        type:Number,
+        default:0,
+    },
+    admin_Varified_Date:{
+        type:String,
+        default:0,
+    },
+    Reject:{
+        type:Number,
+        default:0,
+    },
+    RejectDate:{
+        type:String,
+        default:0,
+    }
+})
+const entranceExamFinalSubmit=mongoose.model('entranceExamFinalSubmit',Schema)
+module.exports=entranceExamFinalSubmit

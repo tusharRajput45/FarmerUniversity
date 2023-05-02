@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    min-height: 100vh;
+}
+a {
+    text-decoration: none;
+}
+.side-menu {
+    position: fixed;
+    background: #f05462;
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    position: absolute;
+    right: 0;
+    width: 80vw;
+    height: 100vh;
+    background: #f1f1f1;
+}
+.container .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    height: 10vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+.container .header .nav {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+.container .header .nav .search {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+}
+.container .header .nav .search input[type=text] {
+    border-radius: 5px;
+    border: none;
+    background: #f1f1f1;
+    padding: 10px;
+    width: 50%;
+}
+.nav-link{
+    color: white;
+    margin-top: 25px;
+    
+}
+.nav-link:hover{
+    color: white;
+    background-color: rgba(92, 25, 158, 0.133);
+    cursor: pointer;
+}
+.cards{
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+    display: flex;
+    padding: 20px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.cards2{
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+    display:inline-flex;
+}
+.card{
+    width: 200px;
+    height: 120px;
+    background: orange;
+    border-radius: 10px;
+    float:left;
+    margin-top: 5%;
+    margin-left: 4% ;
+    transition: 1s;
+}
+.card:hover{
+    transform: scale(1.3);
+    background-color: #999;
+    cursor: pointer;
+}
+.Box{
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+    display: flex;
+}
+.Link-Box{
+    width: 200px;
+    height: 120px;
+    border-radius: 10px;
+    color: white;
+    background: orange;
+    float:left;
+    margin-top: 5%;
+    margin-left: 7% ;
+    transition: 1s;
+    text-align: center;
+    padding: 10px;
+}
+.Link-Box:hover{
+    transform: scale(1.3);
+    background-color: #999;
+    cursor: pointer;
+}

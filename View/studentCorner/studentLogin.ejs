@@ -1,0 +1,92 @@
+<title>Student</title>
+<%- include('../Layout/logo')%>
+<%- include('../Layout/bootstrap')%>
+<hr class="mt-5">
+<body>
+    <div class="row w-100">
+        <div class="col ">
+            <div id="instruction" class="border  m-3 bg-light">
+                <h4 class="text-center text-danger">Instruction</h4>
+                    <div class="">
+                        <p class="pt-4 pl-1 ml-3">Student Login </p>
+                        <p class="p-1 ml-3">Student Login</p>
+                        <p class="p-1 ml-3">Student Login</p>
+                        <p class="p-1 ml-3">Student Login</p>
+                        <p class="p-1 ml-3">Student Login</p>
+                        <p class="p-1 ml-3">Student Login</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col ml-3">
+            <h3>Student Login</h3>
+                <h4 class="text-danger mt-3" id="Error"></h4>
+                <form action="" id="StudentLogin">
+                      <input type="text" name="Email" id="" value="tusharrajput919@gmail.com" class="form-control mt-5 w-75" required><br><br>
+                      <input type="password" name="Password" id="" value="9548574169" class="form-control  w-75" required>
+                      <button class="btn btn-warning mt-5">Login Student</button>
+                      <button class="btn btn-primary mt-5 ml-3" type="button"data-toggle="modal" data-target="#ForgetPasswordModel">Forget Password</button>
+                </form>
+                
+        </div>
+    </div>
+    <hr class="">
+    <div class="modal" id="ForgetPasswordModel">
+        <div class="modal-dialog">
+          <div class="modal-content"> 
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Forget Password</h4>
+              <button type="button" class="btn-close" data-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form class="form-group" id="LMSLoginPasswordForget" autocomplete="off">
+                    <input type="text" name="Email" id="Email" class="form-control mt-3" placeholder="Email" required>
+                    <input type="text" name="Password" id="Password" class="form-control mt-3" placeholder="New Password" required>
+                    <input type="checkbox" name="Agree" id="" class="mt-4" required> I am Register
+                    <div class="modal-footer mt-3">
+                      <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                      <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+                  </div>
+                  
+                </form>
+            </div> 
+            <!-- Modal footer -->
+          </div>
+        </div>
+    </div>
+</body>
+<script>
+    $('document').ready(function(){
+            $('#StudentLogin').submit(function(event){
+                event.preventDefault()
+                $.ajax({
+                    url:'/Student/',
+                    type:'post',
+                    data:$('#StudentLogin').serialize(),
+                    success:function(Result){
+                        const value = Result.match(/@/);
+                          if(value){
+                             alert('Successfully Login')
+                             window.location='/Student/StudentDashboard?Email='+Result;
+                              }else{
+                                $("#Error").removeAttr("hidden").css('visibility','visible');
+                                 $('#Error').html(Result)}
+                             },
+                    error:function(error){alert('Server Error')}
+                })
+            })
+        $('#LMSLoginPasswordForget').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                    url:'/Student/StudentForgetPassword',
+                    type:'post',
+                    data:$('#LMSLoginPasswordForget').serialize(),
+                    success:function(Result){alert(Result)},
+                    error:function(error){alert('Server Error')}
+                })
+            })
+    })
+    
+</script>

@@ -1,0 +1,27 @@
+<%- include('../Layout/bootstrap') %>
+<title>Entrance Exam</title>
+<div class="mt-5">
+    <center><h2 class="text-danger">Tech Farmer University Entrance Exam Test - 2023</h2></center>
+    <button class="btn btn-warning float-end me-5 mt-2">Logout</button>
+</div>
+<hr style="margin-top: 5%;">
+<div class='' id="Content">
+    <div class=" border m-4 p-5 bg-light" id="ContentText">
+        <div id="Model">
+           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum veritatis eligendi officiis sequi ad vitae qui ipsa dolorem aliquid animi, quaerat minus! Voluptatem beatae cumque accusantium rerum fugit deserunt officiis. </p>
+           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum veritatis eligendi officiis sequi ad vitae qui ipsa dolorem aliquid animi, quaerat minus! Voluptatem beatae cumque accusantium rerum fugit deserunt officiis. </p>
+           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum veritatis eligendi officiis sequi ad vitae qui ipsa dolorem aliquid animi, quaerat minus! Voluptatem beatae cumque accusantium rerum fugit deserunt officiis. </p>
+           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum veritatis eligendi officiis sequi ad vitae qui ipsa dolorem aliquid animi, quaerat minus! Voluptatem beatae cumque accusantium rerum fugit deserunt officiis. </p>
+           <button class="btn btn-success  float-end StartExam" id="StartExam"> Start Exam</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(()=>{
+        $('#StartExam').click(()=>{
+            $('#Model').remove()
+            $('#ContentText').load('/entranceExamination/entranceExamQ&A')
+        })
+    })
+</script>
+

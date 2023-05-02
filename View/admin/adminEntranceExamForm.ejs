@@ -1,0 +1,68 @@
+<div class="">
+  <button class="btn btn-warning ml-5" id="ExamKey">Generate Exam Key</button>
+  <input type="search" name="Search" id="Search" class="form-control w-25 float-end" placeholder="Search">
+  <table class="table mt-5">
+       <tr>
+           <th>S.NO</th>
+           <th>RegistrationNO</th>
+           <th>Name</th>
+           <th>Father's Name</th>
+           <th>Final Submit Date</th>
+           <th>Admin Varified</th>
+           <th colspan="7">Action</th>
+       </tr>
+       <% if(Result.length>0){%>
+           <%for(i=0;i<Result.length;i++){%>
+           
+       <tr>
+           <td><%=[1+i]%> </td>
+           <td><%=Result[i].RegistrationNO%></td>
+           <td><%=Result[i].Name%></td>
+           <td><%=Result[i].FatherName%></td>
+           <td><%=Result[i].FinalSubmitDate%></td>
+           <td><%=Result[i].Varified_admin%></td>
+           <td><button  class="btn btn-danger"id="DeleteEntranceExamForm" onclick="DeleteEntranceExamForm('<%= Result[i]._id %>')"><i class="fa fa-trash"></i></button></td>
+       </tr>
+       <%}%>
+       <%}else{%>
+           <td>Data is not found</td>
+           <%}%>
+
+  </table>
+</div>
+ <script>
+   function ViewPhoto(_id){
+       $.ajax({
+         url:'/admin/adminEntranceUploadPhotoVarify',
+         type:'GET',
+         data:{'_id':_id},
+         success:function(Result){
+            const View=`/entranceExamUploadPhoto/${Result}`
+            console.log(View);
+           $('#Photo').attr('src',View)
+         }
+       })
+   }
+   function DeleteEntranceExamForm(_id){
+    $.ajax({
+         url:'/admin/adminDeleteEntranceExamForm',
+         type:'GET',
+         data:{'_id':_id},
+         success:function(Result){
+            alert(Result)
+         }
+       })
+     }
+     $('#ExamKey').click(function(){
+      $.ajax({
+         url:'/admin/adminGenerateEntranceExamKey',
+         type:'post',
+         success:function(Result){
+            alert(Result)
+         }
+       })
+     })
+     
+
+ </script>
+ 

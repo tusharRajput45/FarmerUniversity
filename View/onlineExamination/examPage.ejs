@@ -1,0 +1,161 @@
+<title>Examination</title>
+<%- include('../Layout/bootstrap') %>
+<style>
+  #nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  a{
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color:antiquewhite;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: 600;
+  }
+  .active{
+    color:white;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: 600;
+  }
+  a:hover{
+    display: block;
+    font-weight: 600;
+    color:white;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+    border-radius: 50%;
+  }
+  .NextQuestion{
+    float: right;
+    display: block;
+  }
+  
+</style>
+<div class="" id="content">
+    <div id="header" class="mt-4">
+        <h2 class="text-danger text-center">Entrance Examination 2023-24</h2>
+    </div>
+    <hr class="mt-4">
+    <div class="bg-dark p-3 pb-5">
+        <div>
+            <p class="text-white float-start mt-2 me-4">Time Duration: 1.30 hour</p>
+            <p class="text-white float-start mt-2 me-4" id="Time"></p>
+            <button  class="btn btn-warning ml-3 float-end  me-3" id="Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Logout Exam</button>
+            <button class="btn btn-danger ml-3 float-end  me-3"data-toggle="modal" data-target="#AllQuestionModel">All Question</button>
+            <p class="text-white float-end mt-2 me-4"> Welcome  &nbsp; Tushar Rajput </p>
+        </div>
+    </div>
+    <div id="Sheet" class="ml-5 me-5 mt-3 border p-5 bg-light" style="height: 400px;">
+        <% for(var i=0;i<Result.length;i++){%>
+        <div id="data">
+        <div class="Content">
+          <form action="">
+            <input type="text" name="ExamID" id="" value="4657988" hidden>
+         <div id="" class="Question">
+            <h5>Q.<%= Result[i].QuestionNO%> &nbsp; <%= Result[i].Question%></h5>
+            <input type="text" name="Question" value="<%= Result[i].Question%>" id="" hidden>
+         </div>
+         <div id="Answer" class=" p-2">
+            <input type="text" name="" value="" id="correct_Answer_<%[i]%>"><br>
+          <% for(var j=0;j<Result[i].Answer.length;j++){%>
+            <input type="radio" name="Answer_<%[i]%>" data-id="<%[i]%>" class="select_ans" id="Answer_<%[i]%>" value="<%= Result[i].Answer[j] %>"> &nbsp; <%= Result[i].Answer[j] %><br><br>
+          <%}%>
+         </div>
+        </form>        
+           <button class="btn btn-dark"  id="PreviousQuestion" onclick="PreviousQuestion('<%= Result[i].QuestionNO%>')"> Previous Question</button>
+           <button class="btn btn-success ml-3" id="NextQuestion" onclick="NextQuestion('<%= Result[i].QuestionNO%>')">Next Question</button>
+          </div>
+        </div>
+        <%}%>
+        
+    </div>
+</div>
+
+<script>
+$('document').ready(function(){
+	$('#Sheet').after ('<div id="nav" class="text-center mt-5 mb-5"></div>');  
+	var rowsShown = 1;  
+	var rowsTotal = $('#data .Content').length;  
+	var numPages = rowsTotal/rowsShown;  
+	for (i = 0;i < numPages;i++) {  
+	   var pageNum = i + 1;  
+	   $('#nav').append ('<a href="javascript:void(0)" rel="'+i+'" class="page">'+pageNum+'</a>&nbsp; &nbsp;');  
+	}    
+	$('#data .Content').hide();  
+	$('#data .Content').slice (0, rowsShown).show();
+	$('#nav a:first').addClass('active');  
+	$('#nav a').bind('click', function() {  
+	$('#nav a').removeClass('active');  
+	$(this).addClass('active');  
+		var currPage = $(this).attr('rel');  
+		var startItem = currPage * rowsShown;  
+		var endItem = startItem + rowsShown;  
+		$('#data .Content').css('opacity','0.0').hide().slice(startItem, endItem).  
+	   css('display','table-row').animate({opacity:1}, 300);  
+	});  
+    var time=['0','50']
+      $('#Time').text(time[0]+' : '+time[1]+' : 00 Time Left')
+      var seconds=13;
+      var hours=time[0]
+      var minutes=time[1]
+      setInterval(()=>{
+        if(seconds<=0){
+          minutes--;
+          seconds=59
+          if (minutes<=0) {
+            hours--;
+            minutes=59;
+            seconds=59;
+          }
+        }
+          let tempHours=hours.toString().length > 1? hours:'0'+hours;
+          let tempMinutes=minutes.toString().length > 1? minutes:'0'+minutes;
+          let tempSeconds=seconds.toString().length > 1? seconds:'0'+seconds;
+      $('#Time').text(tempHours+' : '+tempMinutes+' : '+ tempSeconds+' Time Left')
+        seconds--;
+      }, 1000);
+      $('.select_ans').click(function(){
+         var no=$(this).attr('data-id')
+         $('#correct_Answer_'+no).val($(this).val())
+      })
+  })
+ function NextQuestion(Page){
+  if(Page<8){
+	var rowsShown = 1;  
+		var currPage = $('#nav').find('.page.active').next().addClass('active');
+		var currPage = $('#nav').find('.page.active').prev().removeClass('active');
+		var startItem = Page * rowsShown;  
+		var endItem = startItem + rowsShown;  
+		$('#data .Content').css('opacity','0.0').hide().slice(startItem, endItem).  
+	   css('display','table-row').animate({opacity:1}, 300); 
+    }else{
+      alert('Please Submit Your Exam')
+      $('#data .Content').hide()
+  }
+	}
+  function PreviousQuestion(Page){
+    if(Page>1){
+      var rowsShown = 1;  
+		  var currPage = $('#nav').find('.page.active').prev().addClass('active');
+		  var currPage = $('#nav').find('.page.active').next().removeClass('active');
+      const Current_Page=Page-2
+		  var startItem = Current_Page * rowsShown;  
+		  var endItem = startItem + rowsShown;  
+		  $('#data .Content').css('opacity','0.0').hide().slice(startItem, endItem).  
+	    css('display','table-row').animate({opacity:1}, 300); 
+    }else{}
+  	
+  }
+
+</script>

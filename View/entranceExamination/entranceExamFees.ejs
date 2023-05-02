@@ -1,0 +1,41 @@
+<title>Entrance Exam Fee</title>
+<body>
+<div class="bg-primary" style="padding: 20px;">
+  <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas optio vitae est tenetur velit placeat consectetur exercitationem ab porro perferendis, non laborum doloribus deserunt impedit harum soluta sunt, eius corrupti?
+  Sint porro debitis quia corrupti aliquam harum eos consequatur consequuntur doloribus rem numquam commodi quisquam voluptatum quaerat quos quibusdam id fugiat nulla sed magni, quae iusto eveniet blanditiis. Quasi, officiis.
+  Blanditiis ex aspernatur consequuntur odit est, alias quia vel possimus perferendis mollitia sit. Ea rem labore quaerat dolore nemo molestiae minima aut nobis velit at eaque, magnam laborum, in obcaecati.
+  Ab, ducimus? Corrupti corporis voluptatem et facere architecto vel culpa accusantium voluptas iure sapiente labore aliquam, dolorem sed repellat tempore ad rerum fugit inventore, excepturi placeat harum unde modi vitae.</h6>
+  <form id="SubmitForm" action="/entranceExamination/PostentranceExamFeesPay" >
+    <input type="text" name="RegistrationNO" value="<%= Result.RegistrationNO %>" id=""hidden>
+    <input type="text" name="PaymentReferenceNO" value="<%= PaymentReferenceNO %>" id="" hidden>
+    <input type="email" name="Email" id="" value="<%= Result.Email %>" hidden>
+    <div class="p-5">
+        <input type="button" value="Close" class="btn btn-Danger ml-4 float-end" onclick="Refresh()">
+        <input type="submit" id="PaymentNow" value="Payment Now" class="btn btn-warning float-end">
+    </div>
+  </form>
+</div>
+</body>
+
+<script>
+   function Refresh(){
+        location.reload();
+    }
+  $(document).ready(function() {
+        const Form=$('#SubmitForm');
+        $('#SubmitForm').submit(function(event){
+          event.preventDefault();
+         $.ajax({
+            url:Form.attr('action'),
+            type:'post',
+            data:$('#SubmitForm').serialize(),
+            success:function(data){
+              alert('Payment')
+              $('body').load('/entranceExamination/entranceExamFeesPay?Email='+'<%= Result.Email %>'+'&PaymentReferenceNO='+ data)
+            },
+            error:function(){alert('Server Error')}
+         })
+        })
+      });
+    
+</script>

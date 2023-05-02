@@ -1,0 +1,76 @@
+    <title>Entrance Examination Form</title>
+    <style>
+      .Image {
+                height: 150px;
+                width: 150px;
+                border: 2px solid black;
+            }
+      #imgPreview {
+                max-width: 140px;
+                max-height: 140px;
+                min-width: 140px;
+                min-height: 140px;
+            }
+    </style>
+  <body>
+    <center><u><h2>Upload Photo</h2></u></center>
+    <div class="container" style="margin-top: 8%;">
+      <div class="row">
+        <div class="col-sm-8">
+        <form class="mt-5" id="SubmitForm" action="/entranceExamination/PostentranceExamUploadPhoto">
+            <input type="file" name="file" id="file" required />
+            <input type="email" name="Email" id="" value="<%=Result.Email %>" readonly hidden>
+            <button type="submit" class="btn btn-Danger"> Upload</button>
+            <input type="button" value="Close" class="btn btn-warning ml-3" onclick="Refresh()">
+        </form>
+        </div>
+        <div class="col-sm-2">
+          <div class="Image">
+            <img id="imgPreview" src="#" alt="Photo" />
+        </div>
+        </div>
+        </div>
+      </div>
+      <hr style="margin-top:5%;">     
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+       function Refresh(){
+          location.reload()
+        }
+      $(document).ready(function() {
+        const Form=$('#SubmitForm');
+        $('#SubmitForm').submit(function(event){
+          event.preventDefault();
+          const formData=new FormData(this)
+         $.ajax({
+            url:Form.attr('action'),
+            type:'post',
+            data:formData,
+            contentType:false,
+            processData:false,
+            success:function(data){
+              alert('Successfully Upload')
+              $('#file').val('')
+            },
+            error:function(){alert('Server Error')}
+         })
+        })
+        $('#file').change(function(){
+        const file = this.files[0];
+        console.log(file);
+        if (file){
+          let reader = new FileReader();
+          reader.onload = function(event){
+            console.log(event.target.result);
+            $('#imgPreview').attr('src', event.target.result);
+          }
+          reader.readAsDataURL(file);
+        }
+      });
+      });
+    </script>
+  </body>
+</html>

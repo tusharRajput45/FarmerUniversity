@@ -1,0 +1,47 @@
+<title>Result</title>
+<%- include('../Layout/Logo')%>
+<%- include('../Layout/Bootstrap')%>
+<hr class="mt-5">
+<div class="row w-100">
+<div class="col ml-5 p-5 border">
+        <h3 class="text-danger ">College Result Search</h3>
+        <form action="" id="SubmitForm1" class="mt-5" autocomplete="off">
+          <input type="text" name="Name" id="" class="form-control mt-5 w-50" placeholder="Name" required>
+          <input type="text" name="RollNO" id="" class="form-control mt-5 w-50" placeholder="Roll NO" required>
+          <button class="btn btn-success mt-5">Search</button>
+        </form>
+</div>
+<div class="col me-3 p-5 border">
+    <h3 class="text-danger ">Entrance Result Search</h3>
+        <form action="" id="SubmitForm2" class="mt-5" autocomplete="off">
+          <input type="text" name="Name" id="" class="form-control mt-5 w-50" placeholder="Name" required>
+          <input type="text" name="RegistrationNO" id="" class="form-control mt-5 w-50" placeholder="RegistrationNO" required>
+          <button class="btn btn-success mt-5">Search</button>
+        </form>
+</div>
+</div>
+<script>
+    $('document').ready(function(){
+        $('#SubmitForm1').submit(function(event){
+            event.preventDefault()
+            $.ajax({
+                url:'/OnlineExamination/CollegeResult',
+                type:'post',
+                data:$('#SubmitForm1').serialize(),
+                success:function(Result){},
+                error:function(err){},
+            })
+        })
+        $('#SubmitForm2').submit(function(event){ 
+            event.preventDefault()
+            $.ajax({
+                url:'/OnlineExamination/EntranceResult',
+                type:'post',
+                data:$('#SubmitForm2').serialize(),
+                success:function(Result){},
+                error:function(err){},
+            })
+        })
+    })
+</script>
+

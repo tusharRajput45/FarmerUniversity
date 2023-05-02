@@ -1,0 +1,47 @@
+<table class="table">
+   <tr>
+      <th>S.NO</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>CollegeID</th>
+      <th>Varified</th>
+      <th>Action</th>
+   </tr>
+      <% Result.forEach(function(Result,index) { %>
+      <tr>
+         <td><%=index+1 %></td>
+         <td><%=Result.Name%></td>
+         <td><%=Result.Email%></td>
+         <td><%=Result.Mobile%></td>
+         <td><%=Result.CollegeID%></td>
+         <td><%=Result.EmailVarify%></td>
+         <td><button class="btn btn-danger" onclick="deleteRequest('<%= Result._id %>')"><i class="fa fa-trash" ></i></button></td>
+      </tr>
+   <%});%>
+</table>
+<script>
+   $('doucment').ready(function(){
+      
+   })
+          function deleteRequest(_id){
+              $.ajax({
+                url:'/admin/adminLMSStudentRegisterDelete',
+                type:'post',
+                data:{'_id':_id},
+                success:function(Result){
+                  alert(Result)
+                }
+              })
+          }
+          function deleteRequest(){
+              $.ajax({
+                url:'/admin/adminLMSStudentRegisterEdit',
+                type:'post',
+                data:{'_id':_id},
+                success:function(Result){
+                  alert(Result)
+                }
+              })
+          }
+</script>

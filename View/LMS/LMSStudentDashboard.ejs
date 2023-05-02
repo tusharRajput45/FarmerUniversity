@@ -1,0 +1,180 @@
+<title>LMS Student Dashboard</title>
+<%- include('../Layout/bootstrap') %>
+<div id="header">
+   <h1 class="mt-3 text-danger ml-5"> Tech Farmer University , Sarkara Chakrajmal</h1>
+   <h3 class="mt-2 text-success ml-5">Library Management System</h3>
+</div>
+<button class="btn btn-warning float-end me-4" onclick="StudentLogout()">Logout</button>
+<h6 class="text-danger float-end me-4 mt-2">Welcome <%= Result2.Name %></h6>
+<hr class="mt-5">
+<div class="m-3">
+<div class="row">
+   <div class="col-sm-4">
+      <form id="BookRequest" style="width: 80%;" autocomplete="off">
+          <input type="email" name="Email" id="Email" class="form-control mt-3" value="<%= Result2.Email %>" placeholder="CollegeID" readonly>
+          <input type="text" name="BookName" class="form-control mt-3" placeholder="Book Name" required>
+          <input type="text" name="BookAuthorName" class="form-control mt-3" placeholder="Book Author Name" required>
+          <input type="date" name="SubmitDate" class="form-control mt-3" placeholder="Submit Date" required>
+          
+          <button class="btn btn-success mt-5"> Save Request</button>
+      </form>
+   </div>
+   <div class="col">
+      <table class="table"> 
+         <tr class="bg-dark text-light">
+            <th>S.NO</th>
+            <th>Book Name</th>
+            <th>Author Name</th>
+            <th>Request Date</th>
+            <th>Submit Date</th>
+            <th>Status</th>
+            <th colspan="8">Action</th>
+         </tr>
+         <% if(Result.length>0){ %>
+            <%for(var i=0;i<Result.length;i++){ %>
+               <tr class="bg-light">
+                  <td><%= i+1 %></td>
+                  <td><%= Result[i].BookName %></td>
+                  <td><%= Result[i].BookAuthorName %></td>
+                  <td><%= Result[i].RequestDate %></td>
+                  <td><%= Result[i].SubmitDate %></td>
+                  <td><%= Result[i].Status %></td>
+                  <td><button class="btn btn-primary" data-toggle="modal"  data-target="#RequestStatusModel" onclick="statusRequest('<%= Result[i]._id %>')"><i class="fas fa-info-circle"></i></button></td>
+                  <td><button class="btn btn-warning" data-toggle="modal"  data-target="#EditRequestModel" onclick="editRequest('<%= Result[i]._id %>')"><i class="fa fa-edit"></i></button></td>
+                  <td><button class="btn btn-danger" onclick="deleteRequest('<%= Result[i]._id %>')"><i class="fa fa-trash" ></i></button></td>
+      
+               </tr>
+         <%} %>
+         <%}else{ %>
+            <tr class="bg-light"><td colspan="8">Data is not found</td></tr>
+         <%} %>
+         
+      </table>
+   </div>
+</div>
+</div>
+<div class="modal" id="RequestStatusModel">
+   <div class="modal-dialog">
+     <div class="modal-content"> 
+ 
+       <!-- Modal Header -->
+       <div class="modal-header">
+         <h4 class="modal-title">Request Status </h4>
+         <button type="button" class="btn-close" data-dismiss="modal"></button>
+       </div>
+       <!-- Modal body -->
+       <div class="modal-body">
+            <h5 id="Status" class="text-danger text-center"></h5>
+               <div class="modal-footer mt-3">
+                 <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+             </div>
+       </div> 
+       <!-- Modal footer -->
+     </div>
+   </div>
+ </div>
+<div class="modal" id="EditRequestModel">
+   <div class="modal-dialog">
+     <div class="modal-content"> 
+ 
+       <!-- Modal Header -->
+       <div class="modal-header">
+         <h4 class="modal-title">Edit Book Request</h4>
+         <button type="button" class="btn-close" data-dismiss="modal"></button>
+       </div>
+       <!-- Modal body -->
+       <div class="modal-body">
+           <form class="form-group" id="EditRequest" autocomplete="off">
+            <input type="text" name="RequestNO" id="RequestNO" class="form-control"placeholder="Request NO" readonly required>
+            <input type="text" name="BookName" id="BookName" class="form-control mt-3" placeholder="Book Name" required>
+            <input type="text" name="BookAuthorName" id="BookAuthorName" class="form-control mt-3" placeholder="Book Author Name"required>
+            <input type="date" name="SubmitDate" id="SubmitDate" class="form-control mt-3" placeholder="Submit Date"required>
+               <div class="modal-footer mt-3">
+                 <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                 <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+             </div>
+           </form>
+       </div> 
+       <!-- Modal footer -->
+     </div>
+   </div>
+ </div>
+ <script>
+   $('document').ready(function(){
+          $('#BookRequest').submit(function(event){
+            event.preventDefault();
+             $.ajax({
+               url:'/LMS/LMSStudentBookRequest',
+               type:'post',
+               data:$('#BookRequest').serialize(),
+               success:function(Result){
+                  alert(Result)
+                  location.reload()
+               },
+               error:function(){
+                  alert('Server Error')
+               }
+             })
+          })
+          
+          $('#EditRequest').submit(function(event){
+            event.preventDefault();
+             $.ajax({
+               url:'/LMS/LMSPostStudentBookRequestEdit',
+               type:'post',
+               data:$('#EditRequest').serialize(),
+               success:function(Result){
+                  alert(Result)
+                  location.reload()
+               },
+               error:function(){
+                  alert('Server Error')
+               }
+             })
+          })
+   })
+          function editRequest(_id){
+              $.ajax({
+                url:'/LMS/LMSGetStudentBookRequestEdit',
+                type:'Get',
+                data:{'_id':_id},
+                success:function(Result){
+                  $('#RequestNO').val(Result.RequestNO)   
+                  $('#BookName').val(Result.BookName)   
+                  $('#BookAuthorName').val(Result.BookAuthorName)   
+                  $('#SubmitDate').val(Result.SubmitDate)   
+                }
+              })
+          }
+          function statusRequest(_id){
+              $.ajax({
+                url:'/LMS/LMSGetStudentBookRequestStatus',
+                type:'Get',
+                data:{'_id':_id},
+                success:function(Result){
+                  $('#Status').text(Result.RequestStatus)   
+                }
+              })
+          }
+          function deleteRequest(_id){
+              $.ajax({
+                url:'/LMS/LMSStudentBookRequestDelete',
+                type:'Get',
+                data:{'_id':_id},
+                success:function(Result){
+                  alert(Result)
+                  location.reload()
+                }
+              })
+          }
+          function StudentLogout(){
+            $.ajax({
+                url:'/LMS/LMSStudentDashboardLogout',
+                type:'Get',
+                success:function(Result){
+                  alert(Result)
+                  location.reload()
+                }
+              })
+          }
+ </script>

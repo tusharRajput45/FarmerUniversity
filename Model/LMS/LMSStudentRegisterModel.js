@@ -1,0 +1,52 @@
+const { default: mongoose } = require("mongoose");
+
+const Schema=mongoose.Schema({
+        Name:{
+            type:String,
+            required:true,
+            uppercase:true,
+        },
+        Email:{
+            type:String,
+            required:true,
+            unique:true,
+        },
+        CollegeID:{
+            type:String,
+            required:true,
+            unique:true,
+        },
+        Mobile:{
+            type:Number,
+            required:true,
+            unique:true,
+        },
+        Password:{
+            type:String,
+            required:true,
+        },
+        RegisterDate:{
+            type:String,
+            default:0,
+        },
+        RegisterTime:{
+            type:String,
+            default:0,
+        },
+        EmailVarify:{
+            type:Number,
+            value:[0,1],
+            default:0
+        },
+        LMSAdminVarify:{
+            type:Number,
+            value:[0,1],
+            default:0
+        },
+        BookIssue:{
+            type:Number,
+            default:0,
+        }
+})
+const LMSStudentRegisterModel=mongoose.model('LMSStudentRegister',Schema)
+module.exports=LMSStudentRegisterModel

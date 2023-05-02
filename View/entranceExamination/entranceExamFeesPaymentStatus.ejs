@@ -1,0 +1,33 @@
+<title>Entrance Exam Fees Status</title>
+<%- include('../Layout/logo') %>
+<%- include('../Layout/bootstrap') %>
+<hr class="mt-5">
+<div>
+    <table class="W-100  table">
+        <tr class="bg-dark text-white text-center">
+            <th>Name</th>
+            <th>Registration NO</th>
+            <th>Payment Reference NO</th>
+            <th>Payment Status</th>
+            <th>Payment Date</th>
+            <th>Payment Time</th>
+            <th>Payment Mode</th>
+        </tr>
+        <% if(Result.length>0){%>
+            <% for(var i=0;i<Result.length;i++){%>
+        <tr class="text-danger bg-light text-center" >
+            <td><%= Name %></td>
+            <td><%= Result[i].RegistrationNO %></td>
+            <td><%= Result[i].PaymentReferenceNO %></td>
+            <td><%= Result[i].PaymentStatus %></td>
+            <td><%= Result[i].PaymentDate %></td>
+            <td><%= Result[i].PaymentTime %></td>
+            <td>Online</td>
+
+        </tr>
+        <%}%>
+        <%}else{%>
+            <td colspan="6">Payment is not found</td>
+        <%}%>
+    </table>
+</div>

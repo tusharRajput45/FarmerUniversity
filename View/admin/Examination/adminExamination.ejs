@@ -1,0 +1,36 @@
+<script>
+    $(document).ready(function(){
+  var i = 1;
+  $('#AddSubject').click(function(){
+  i++;
+  $('#DynamicSubject').append('<div id="removeSubject">'+
+                '<input type="text" name="ExamSubject[]" id="ExamSubject" placeholder="Exam Subject" class="form-control mt-3" style="width: 90%;"required>'+
+                '<button type="button" class="btn btn-danger float-end remove_Subject" style="margin-top: -8%;">-</button>'+
+                '</div>'
+              )
+  }); 
+  });
+  $(document).on('click','.remove_Subject',function(){
+        $(this).parent().remove()
+    });
+  $('#AddExam').submit(function(event){
+      $.ajax({
+      url:'/admin/PostAddExam',
+      type:'post',
+      data:$('#AddExam').serialize()+{'Name':45},
+      success:function(result){
+          alert(result)
+          location.reload()
+      },
+      error:function(err){alert('Server Error')}
+  })
+  event.preventDefault();
+    })
+  function trueAnswer(v){
+      const indexValue=$(v).parent().parent().index()
+       console.log(indexValue);
+    }
+  $('#ShowAllExam').click(function(){
+    $('#Content').load('/admin/showAllExam')
+  })    
+  </script>

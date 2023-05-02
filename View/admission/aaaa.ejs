@@ -1,0 +1,130 @@
+<title>Admission Dashboard</title>
+<body id="Content">
+<%- include('../Layout/bootstrap')%>
+<style>
+   #Img{
+      width: 55%;
+      height: 20%;
+      border-radius: 60%;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin-left:22%;
+   }
+   .img{
+      margin: auto;
+      /* width: 640px; */
+      padding: 30px;
+   }
+</style>
+<div class="row w-100" style="height: auto;">
+        <div class=" bg-dark pt-2 ml-3 text-center" style="height:100%;width: 20%;">
+             <div class="bg-light mt-3 fs-1 text-center" id="Img"><i class="img fa-solid fa-user fa-flip"></i></div>
+             <button class="btn btn-danger w-100 mt-3" id="EducationDetails">Education Details</button><br>
+             <button class="btn btn-danger w-100 mt-3" id="AddressDetails">Address Details</button><br>
+             <button class="btn btn-danger w-100 mt-3"data-toggle="modal" data-target="#StudentProfileModel">Course Details</button><br>
+             <button class="btn btn-danger w-100 mt-3"data-toggle="modal" data-target="#EntranceExamResultModel">Upload Document</button><br>
+             <button class="btn btn-danger w-100 mt-3">Payment</button><br>
+             <button class="btn btn-danger w-100 mt-3"data-toggle="modal" data-target="#PaymentModel">Final Print</button><br>
+             <button class="btn btn-warning w-100 mt-3"data-toggle="modal" data-target="#AppicationPasswordForgetModel">Change Application Password</button><br>
+             <button class="btn btn-warning w-100 mt-3" onclick="LogoutProfile()">Logout Profile &nbsp;  <i class="fa fa-sign-out" aria-hidden="true"></i> </button><br>
+             <hr class="bg-light">
+             <p class="text-light fs-5">Contact</p>
+             <hr class="bg-light">
+             <p class="text-light fs-6">techfarmeruniv@gmail.com</p>
+             <hr class="bg-light">
+             <p class="text-light fs-6">415-4788-124</p>
+             
+        </div>
+        <div class="col w-100" id="">
+         <div class="text-light fs-5"  style="background-color: blue;">
+            <p class="me-5 float-end mt-3"> Appliaction NO 15427845877</p>
+            <p class="ml-3 p-3">Welcome Tushar Rajput</p>
+         </div>
+            <div class="border w-100 bg-light" id="FormContent" style="height:auto;">
+                <table class="table border" style="background-color: rgb(240, 242, 245);">
+                     <tr>
+                        <th>Name</th>
+                        <td></td>
+                        <th>Father's Name</th>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <th>Mother's Name</th>
+                        <td> </td>
+                        <th>Aadhad Card NO</th>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <th>Mobile</th>
+                        <td></td>
+                        <th>Email</th>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <th>Date of Birth</th>
+                        <td></td>
+                        <th>Class</th>
+                        <td>BCA</td>
+                     </tr>
+                     <tr>
+                        <th>Caste</th>
+                        <td></td>
+                        <th>Category</th>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <th>Religion</th>
+                        <td></td>
+                        <th>Sub-Category</th>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <th>City</th>
+                        <td> </td>
+                        <th>State</th>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <th>Country</th>
+                        <td></td>
+                     </tr>
+                </table>
+                <div class="bg-light text-center text-danger pt-3 pb-3 fs-5">
+                     <p>Admission Appliaction Registration Successfully</p>
+                     <p>Admission Application NO 15427845877</p>
+                     <button class="btn btn-success text-center " onclick="NextStep()">Application</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="AppicationPasswordForgetModel">
+         <div class="modal-dialog">
+           <div class="modal-content"> 
+       
+             <!-- Modal Header -->
+             <div class="modal-header">
+               <h4 class="modal-title">Forget Application Password</h4>
+               <button type="button" class="btn-close" data-dismiss="modal"></button>
+             </div>
+             <!-- Modal body -->
+             <div class="modal-body">
+                 <form class="form-group" id="AppicationPasswordForget" autocomplete="off">
+                     <input type="text" name="AppliactionNO" id="AppliactionNO" class="form-control mt-3" placeholder="AppliactionNO" required readonly>
+                     <input type="text" name="Password" id="Password" class="form-control mt-3" placeholder="New Password" required>
+                     <div class="modal-footer mt-3">
+                       <button type="submit" class="btn btn-warning mt-3" id="">Submit</button>
+                       <button type="button" class="btn btn-danger mt-3" data-dismiss="modal">Close</button>
+                   </div>
+                 </form>
+             </div> 
+             <!-- Modal footer -->
+           </div>
+         </div>
+     </div>
+        <script>
+            function NextStep(){
+               $('#FormContent').load('/admission/admissionEducationDetails')
+               $('#EducationDetails').removeClass('btn-danger')
+               $('#EducationDetails').addClass('btn-primary')
+            }
+        </script>

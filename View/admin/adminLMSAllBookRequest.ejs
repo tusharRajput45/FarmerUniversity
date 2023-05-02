@@ -1,0 +1,22 @@
+<table class="table">
+    <tr>
+       <th>S.NO</th>
+       <th>Name</th>
+       <th>Book Name</th>
+       <th>Book Author Name</th>
+       <th>College ID</th>
+       <th>Book Issue Varified</th>
+       <th>Action</th>
+    </tr>
+       <% Result.forEach(function(Result,index) { %>
+       <tr>
+          <td><%=index+1 %></td>
+          <td><%=Result.Name%></td>
+          <td><%=Result.BookName%></td>
+          <td><%=Result.BookAuthorName%></td>
+          <td><%=Result.CollegeID%></td>
+          <td><%=Result.BookIssueVarified%></td>
+          <td><button class="btn btn-danger" onclick="deleteRequest('<%= Result._id %>')"><i class="fa fa-trash" ></i></button></td>
+       </tr>
+    <%});%>
+ </table>
